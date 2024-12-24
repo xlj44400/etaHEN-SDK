@@ -1,19 +1,19 @@
-etaHEN SDK
+etaHEN Plugin SDK
 =====
-- The etaHEN SDK is a collection of tool open source tools and samples for developing for [etaHEN](https://github.com/LightningMods/etaHEN), requires the [PS5SDK](https://github.com/PS5Dev/PS5SDK)
-- The etaHEN SDK has support for dynamic linking with libraries available in the libs folder
+- The etaHEN Plugin SDK is a collection of tool open source tools and samples for developing for [etaHEN](https://github.com/LightningMods/etaHEN), requires the [Johns SDK](https://github.com/ps5-payload-dev/sdk)
+- The etaHEN Plugin SDK has support for dynamic linking with libraries available in the libs folder 
 - Any ELF or Plugin made with this SDK is already jailbroken, no code required
 
 
 etaHEN ELFs vs Plugins
 -------------
-- **ELFs**: are meant for single use payload-like programs where they run a single task (like showing hwinfo in a notification, etc) then exit, requires the elfldr (HEN-V) plugin
-- **Plugins**: are daemons that are meant to run the whole time the console is on in the background
+- **ELFs**: are meant for single use payload-like programs where they run a single task (like showing hwinfo in a notification, etc) will need johns elf losder active 
+- **Plugins**: are daemons that are meant to run the whole time the console is on in the background (can only be loaded by etaHEN)
 
 
 Plugins
 --------
-- Plugins can be loaded by etaHEN automatically from either `/mnt/usb<number>/etaHEN/plugins` or internally from `/data/etaHEN/plugins` when etaHEN is first ran (HENV not required) or by the etaHEN toolbox (HENV plugin or Itemzflow 1.07+ required)
+- Plugins can be loaded by etaHEN automatically from either `/mnt/usb<number>/etaHEN/plugins` or internally from `/data/etaHEN/plugins` when etaHEN is first ran or by the etaHEN toolbox 
 - Plugins located in the `etahen > plugins` folder on USB root are given priority over internally installed plugins in `/data/etaHEN/plugins`
 - Duplicate Plugins are ignored by etaHEN on startup (but are listed in the toolbox's plugin section), etaHEN also checks if the plugin title id is already running
 - Plugins can be killed and ran via etaHEN's toolbox
@@ -29,7 +29,7 @@ ELFs
 
 * The elf loader will listen on port `9022`. This is to prevent conflicts
   with the elf loader used to start etaHEN.
-* Payloads are run as an app local process (subprocess) by HEN-V (elfldr.plugin).
+* Payloads are run as an app local process (subprocess)
 * Up to 6 payloads may be running simultaneously.
   This may be extended to 15 in the future if editing the budget becomes possible.
 * All payloads have a default sighandler installed automatically for signals that will
@@ -44,70 +44,6 @@ static void default_handler(int sig) {
 }
 ```
 
-
-Commands
---------
-
-* Commands may be sent to HEN-V from a payload or application.
-* Full details and examples are shown in [commands.md](commands.md).
-
-Kernel Read/Write Server
-------------------------
-
-* For processes which may need kernel r/w that were started from an alternate
-  userland entrypoing (bdj, webkit, masticore, etc) kernel r/w may be requested
-  by sending the following to port `1338`.
-```c
-typedef struct kernelrw_request {
-    int pid;
-    int master;
-    int victim;
-} kernelrw_request_t;
-```
-* The master and victim sockets **must** be configured properly prior to making the request.
-  An example of how to prepare the sockets is shown below.
-```c
-int configure_sockets(int *restrict master, int *restrict victim) {
-    const size_t IN6_PKTINFO_SIZE = 20;
-    *master = -1;
-    *victim = -1;
-    *master = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-    if (*master == -1) {
-        return -1;
-    }
-    *victim = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-    if (*victim == -1) {
-        close(*master);
-        *master = -1;
-        return -1;
-    }
-    uint32_t buf[] = {IN6_PKTINFO_SIZE, IPPROTO_IPV6, IPV6_TCLASS, 0, 0, 0};
-    if (setsockopt(*master, IPPROTO_IPV6, IPV6_2292PKTOPTIONS, buf, sizeof(buf))) {
-        close(*master);
-        close(*victim);
-        *master = -1;
-        *victim = -1;
-        return -1;
-    }
-    memset(buf, 0, sizeof(buf));
-    if (setsockopt(*victim, IPPROTO_IPV6, IPV6_PKTINFO, NativeMemory.addressOf(buf), IN6_PKTINFO_SIZE)) {
-        close(*master);
-        close(*victim);
-        *master = -1;
-        *victim = -1;
-        return -1;
-    }
-    return 0;
-}
-```
-* The response from the server will be as follows:
-```c
-typedef struct kernelrw_response {
-    uintptr_t kernel_base; // will be 0 if an error occured
-    uint32_t error_length; // includes the NULL terminator
-    char error[error_length];
-} kernelrw_response_t;
-```
 
 Credits
 -------
