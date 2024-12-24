@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "dbg.hpp"
 #include "dbg/dbg.hpp"
+#include <notify.hpp>
 #include "elf/elf.hpp"
 #include "fd.hpp"
 #include "hijacker/hijacker.hpp"
@@ -44,15 +45,16 @@ extern "C" int sceSystemServiceGetAppId(const char *);
 #define BUILD_MSG "Non Rest Mode Build"
 #endif
 #include "backtrace.hpp"
+extern "C" int sceSystemServiceLoadExec(const char *path, void* args);
 void sig_handler(int signo)
 {
-	notify("Cheats plugin has crashed with signal %d", signo);
+	printf_notification("Cheats plugin has crashed with signal %d", signo);
 	printBacktraceForCrash();
-    printf("ItemzLocalKillApp(sceSystemServiceGetAppId(ILLU00000)) returned %i\n", sceSystemServiceKillApp(sceSystemServiceGetAppId("ILLU00000"), -1, 0, 0));
+    sceSystemServiceLoadExec("exit", nullptr);
 }
 
 #include "game_patch_xml_cfg.hpp"
-
+uintptr_t kernel_base = 0;
 int main()
 {
 	puts("daemon entered");
@@ -61,13 +63,17 @@ int main()
 	sigemptyset(&new_SIG_action.sa_mask);
 	new_SIG_action.sa_flags = 0;
 
-	for (int i = 0; i < 12; i++)
-		sigaction(i, &new_SIG_action, NULL);
+	for (int i = 0; i < 12; i++){
+	  	sigaction(i, &new_SIG_action, NULL);
+	}
 
 	mkdir(BASE_ETAHEN_PATCH_PATH, 0777);
 	mkdir(BASE_ETAHEN_PATCH_SETTINGS_PATH, 0777);
 	mkdir(BASE_ETAHEN_PATCH_DATA_PATH_PS4, 0777);
 	mkdir(BASE_ETAHEN_PATCH_DATA_PATH_PS5, 0777);
+
+	payload_args_t *args = payload_get_args();
+	kernel_base = args->kdata_base_addr;
 
 	unlink("/data/etaHEN/cheat_plugin.log");
 
@@ -79,8 +85,8 @@ int main()
 	// remove this when it's possible to load elf into games at boot
 	pthread_t game_patch_thread_id = nullptr;
 	pthread_create(&game_patch_thread_id, nullptr, GamePatch_Thread, nullptr);
-	//pthread_t game_patch_input_thread_id = nullptr;
-	//pthread_create(&game_patch_input_thread_id, nullptr, GamePatch_InputThread, nullptr);
+	pthread_t game_patch_input_thread_id = nullptr;
+	pthread_create(&game_patch_input_thread_id, nullptr, GamePatch_InputThread, nullptr);
 
 	g_game_patch_thread_running = true;
 #ifdef RESTMODE

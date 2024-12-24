@@ -8,13 +8,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_ROOT}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_ROOT}/lib)	# static libs are archive
 
 include_directories	(SYSTEM "${PROJECT_ROOT}/include")
-include_directories(SYSTEM "${D_PS5SDK}")
-include_directories(SYSTEM "${D_PS5SDK}/include")
+include_directories(SYSTEM "${PS5_PAYLOAD_SDK}")
+include_directories(SYSTEM "${PS5_PAYLOAD_SDK}/include")
 
 add_subdirectory(libhijacker)
-add_subdirectory(libNidResolver)
-add_subdirectory(libelfloader)
-
 
 add_subdirectory(Plugin_samples/utility_daemon)
 add_subdirectory(Plugin_samples/Illusion_cheats)
