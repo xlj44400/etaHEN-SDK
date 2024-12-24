@@ -301,6 +301,30 @@ source/offsets.cpp.s:
 	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f libhijacker/CMakeFiles/hijacker.dir/build.make libhijacker/CMakeFiles/hijacker.dir/source/offsets.cpp.s
 .PHONY : source/offsets.cpp.s
 
+source/spawner.o: source/spawner.cpp.o
+.PHONY : source/spawner.o
+
+# target to build an object file
+source/spawner.cpp.o:
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f libhijacker/CMakeFiles/hijacker.dir/build.make libhijacker/CMakeFiles/hijacker.dir/source/spawner.cpp.o
+.PHONY : source/spawner.cpp.o
+
+source/spawner.i: source/spawner.cpp.i
+.PHONY : source/spawner.i
+
+# target to preprocess a source file
+source/spawner.cpp.i:
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f libhijacker/CMakeFiles/hijacker.dir/build.make libhijacker/CMakeFiles/hijacker.dir/source/spawner.cpp.i
+.PHONY : source/spawner.cpp.i
+
+source/spawner.s: source/spawner.cpp.s
+.PHONY : source/spawner.s
+
+# target to generate assembly for a file
+source/spawner.cpp.s:
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f libhijacker/CMakeFiles/hijacker.dir/build.make libhijacker/CMakeFiles/hijacker.dir/source/spawner.cpp.s
+.PHONY : source/spawner.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -331,6 +355,9 @@ help:
 	@echo "... source/offsets.o"
 	@echo "... source/offsets.i"
 	@echo "... source/offsets.s"
+	@echo "... source/spawner.o"
+	@echo "... source/spawner.i"
+	@echo "... source/spawner.s"
 .PHONY : help
 
 

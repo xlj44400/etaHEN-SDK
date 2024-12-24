@@ -513,7 +513,7 @@ for (auto p: dbg::getProcesses()) {
       text_base = executable->getEboot()->getTextSection()->start();
       text_size = executable->getEboot()->getTextSection()->sectionLength();
     } else {
-      cheat_log("Failed to get hijacker for %s (%d)", tid.c_str(), app_pid);
+     // cheat_log("Failed to get hijacker for %s (%d)", tid.c_str(), app_pid);
       continue;
     }
     if (text_base == 0 || text_size == 0) {
