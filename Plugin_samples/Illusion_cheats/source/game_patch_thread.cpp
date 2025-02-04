@@ -39,12 +39,11 @@ void cheat_log(const char *fmt, ...) {
   va_end(args);
 
   // Append newline at the end
-  if (msg[msg_len - 1] == '\n') {
-    write_log(msg);
-  } else {
+  if (msg[msg_len - 1] != '\n') {
     strcat(msg, "\n");
-    write_log(msg);
   }
+
+  write_log(msg);
 }
 
 extern "C" {
