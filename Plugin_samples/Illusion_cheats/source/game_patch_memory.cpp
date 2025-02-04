@@ -1,6 +1,7 @@
 #include "dbg/dbg.hpp"
 #include "game_patch_memory.hpp"
 #include "print.hpp"
+#include "notify.hpp"
 
 uint32_t FlipRate_ConfigureOutput_Ptr;
 uint32_t FlipRate_isVideoModeSupported_Ptr;
