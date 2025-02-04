@@ -281,6 +281,7 @@ bool patchShellCore(const pid_t app_pid, const uint64_t shellcore_base, const ui
 	shellcore_offset_patch = 0;
 	if (!shellcore_base || !shellcore_size)
 	{
+		printf_notification("shellcore base or size are not found %llx %llx", shellcore_base, shellcore_size);
 		return false;
 	}
 	cheat_log("allocating 0x%lx bytes\n", shellcore_size);
@@ -306,6 +307,7 @@ bool patchShellCore(const pid_t app_pid, const uint64_t shellcore_base, const ui
 		}
 		else
 		{
+			printf_notification("unable to find the shellcore offset with Pattern Scan");
 			status = false;
 		}
 	}
