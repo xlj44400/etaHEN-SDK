@@ -317,7 +317,7 @@ bool patchShellCore(const pid_t app_pid, const uint64_t shellcore_base, const ui
 		cheat_log("freeing shellcore_copy from 0x%p\n", shellcore_copy);
 		free(shellcore_copy);
 	}
-	printf_notification("returning %d", status);
+	//printf_notification("returning %d", status);
 	return status;
 }
 
