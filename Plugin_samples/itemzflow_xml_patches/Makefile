@@ -90,14 +90,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK/CMakeFiles /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK/Plugin_samples/Illusion_cheats//CMakeFiles/progress.marks
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/Illusion_cheats/all
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK/CMakeFiles /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK/Plugin_samples/itemzflow_xml_patches//CMakeFiles/progress.marks
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/itemzflow_xml_patches/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/Illusion_cheats/clean
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/itemzflow_xml_patches/clean
 .PHONY : clean
 
 # The main clean target
@@ -106,12 +106,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/Illusion_cheats/preinstall
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/itemzflow_xml_patches/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/Illusion_cheats/preinstall
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/itemzflow_xml_patches/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -120,25 +120,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/rule:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/rule
-.PHONY : Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/rule
+Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/rule:
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/rule
+.PHONY : Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/rule
 
 # Convenience name for target.
-illusion_cheats: Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/rule
-.PHONY : illusion_cheats
+itemzflow_xml_patches: Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/rule
+.PHONY : itemzflow_xml_patches
 
 # fast build rule for target.
-illusion_cheats/fast:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build
-.PHONY : illusion_cheats/fast
+itemzflow_xml_patches/fast:
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build
+.PHONY : itemzflow_xml_patches/fast
 
 __/__/extern/mxml/mxml-attr.o: __/__/extern/mxml/mxml-attr.c.o
 .PHONY : __/__/extern/mxml/mxml-attr.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-attr.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-attr.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-attr.c.o
 .PHONY : __/__/extern/mxml/mxml-attr.c.o
 
 __/__/extern/mxml/mxml-attr.i: __/__/extern/mxml/mxml-attr.c.i
@@ -146,7 +146,7 @@ __/__/extern/mxml/mxml-attr.i: __/__/extern/mxml/mxml-attr.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-attr.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-attr.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-attr.c.i
 .PHONY : __/__/extern/mxml/mxml-attr.c.i
 
 __/__/extern/mxml/mxml-attr.s: __/__/extern/mxml/mxml-attr.c.s
@@ -154,7 +154,7 @@ __/__/extern/mxml/mxml-attr.s: __/__/extern/mxml/mxml-attr.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-attr.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-attr.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-attr.c.s
 .PHONY : __/__/extern/mxml/mxml-attr.c.s
 
 __/__/extern/mxml/mxml-entity.o: __/__/extern/mxml/mxml-entity.c.o
@@ -162,7 +162,7 @@ __/__/extern/mxml/mxml-entity.o: __/__/extern/mxml/mxml-entity.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-entity.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-entity.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-entity.c.o
 .PHONY : __/__/extern/mxml/mxml-entity.c.o
 
 __/__/extern/mxml/mxml-entity.i: __/__/extern/mxml/mxml-entity.c.i
@@ -170,7 +170,7 @@ __/__/extern/mxml/mxml-entity.i: __/__/extern/mxml/mxml-entity.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-entity.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-entity.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-entity.c.i
 .PHONY : __/__/extern/mxml/mxml-entity.c.i
 
 __/__/extern/mxml/mxml-entity.s: __/__/extern/mxml/mxml-entity.c.s
@@ -178,7 +178,7 @@ __/__/extern/mxml/mxml-entity.s: __/__/extern/mxml/mxml-entity.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-entity.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-entity.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-entity.c.s
 .PHONY : __/__/extern/mxml/mxml-entity.c.s
 
 __/__/extern/mxml/mxml-file.o: __/__/extern/mxml/mxml-file.c.o
@@ -186,7 +186,7 @@ __/__/extern/mxml/mxml-file.o: __/__/extern/mxml/mxml-file.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-file.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-file.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-file.c.o
 .PHONY : __/__/extern/mxml/mxml-file.c.o
 
 __/__/extern/mxml/mxml-file.i: __/__/extern/mxml/mxml-file.c.i
@@ -194,7 +194,7 @@ __/__/extern/mxml/mxml-file.i: __/__/extern/mxml/mxml-file.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-file.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-file.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-file.c.i
 .PHONY : __/__/extern/mxml/mxml-file.c.i
 
 __/__/extern/mxml/mxml-file.s: __/__/extern/mxml/mxml-file.c.s
@@ -202,7 +202,7 @@ __/__/extern/mxml/mxml-file.s: __/__/extern/mxml/mxml-file.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-file.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-file.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-file.c.s
 .PHONY : __/__/extern/mxml/mxml-file.c.s
 
 __/__/extern/mxml/mxml-get.o: __/__/extern/mxml/mxml-get.c.o
@@ -210,7 +210,7 @@ __/__/extern/mxml/mxml-get.o: __/__/extern/mxml/mxml-get.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-get.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-get.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-get.c.o
 .PHONY : __/__/extern/mxml/mxml-get.c.o
 
 __/__/extern/mxml/mxml-get.i: __/__/extern/mxml/mxml-get.c.i
@@ -218,7 +218,7 @@ __/__/extern/mxml/mxml-get.i: __/__/extern/mxml/mxml-get.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-get.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-get.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-get.c.i
 .PHONY : __/__/extern/mxml/mxml-get.c.i
 
 __/__/extern/mxml/mxml-get.s: __/__/extern/mxml/mxml-get.c.s
@@ -226,7 +226,7 @@ __/__/extern/mxml/mxml-get.s: __/__/extern/mxml/mxml-get.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-get.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-get.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-get.c.s
 .PHONY : __/__/extern/mxml/mxml-get.c.s
 
 __/__/extern/mxml/mxml-index.o: __/__/extern/mxml/mxml-index.c.o
@@ -234,7 +234,7 @@ __/__/extern/mxml/mxml-index.o: __/__/extern/mxml/mxml-index.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-index.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-index.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-index.c.o
 .PHONY : __/__/extern/mxml/mxml-index.c.o
 
 __/__/extern/mxml/mxml-index.i: __/__/extern/mxml/mxml-index.c.i
@@ -242,7 +242,7 @@ __/__/extern/mxml/mxml-index.i: __/__/extern/mxml/mxml-index.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-index.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-index.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-index.c.i
 .PHONY : __/__/extern/mxml/mxml-index.c.i
 
 __/__/extern/mxml/mxml-index.s: __/__/extern/mxml/mxml-index.c.s
@@ -250,7 +250,7 @@ __/__/extern/mxml/mxml-index.s: __/__/extern/mxml/mxml-index.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-index.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-index.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-index.c.s
 .PHONY : __/__/extern/mxml/mxml-index.c.s
 
 __/__/extern/mxml/mxml-node.o: __/__/extern/mxml/mxml-node.c.o
@@ -258,7 +258,7 @@ __/__/extern/mxml/mxml-node.o: __/__/extern/mxml/mxml-node.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-node.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-node.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-node.c.o
 .PHONY : __/__/extern/mxml/mxml-node.c.o
 
 __/__/extern/mxml/mxml-node.i: __/__/extern/mxml/mxml-node.c.i
@@ -266,7 +266,7 @@ __/__/extern/mxml/mxml-node.i: __/__/extern/mxml/mxml-node.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-node.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-node.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-node.c.i
 .PHONY : __/__/extern/mxml/mxml-node.c.i
 
 __/__/extern/mxml/mxml-node.s: __/__/extern/mxml/mxml-node.c.s
@@ -274,7 +274,7 @@ __/__/extern/mxml/mxml-node.s: __/__/extern/mxml/mxml-node.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-node.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-node.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-node.c.s
 .PHONY : __/__/extern/mxml/mxml-node.c.s
 
 __/__/extern/mxml/mxml-private.o: __/__/extern/mxml/mxml-private.c.o
@@ -282,7 +282,7 @@ __/__/extern/mxml/mxml-private.o: __/__/extern/mxml/mxml-private.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-private.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-private.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-private.c.o
 .PHONY : __/__/extern/mxml/mxml-private.c.o
 
 __/__/extern/mxml/mxml-private.i: __/__/extern/mxml/mxml-private.c.i
@@ -290,7 +290,7 @@ __/__/extern/mxml/mxml-private.i: __/__/extern/mxml/mxml-private.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-private.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-private.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-private.c.i
 .PHONY : __/__/extern/mxml/mxml-private.c.i
 
 __/__/extern/mxml/mxml-private.s: __/__/extern/mxml/mxml-private.c.s
@@ -298,7 +298,7 @@ __/__/extern/mxml/mxml-private.s: __/__/extern/mxml/mxml-private.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-private.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-private.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-private.c.s
 .PHONY : __/__/extern/mxml/mxml-private.c.s
 
 __/__/extern/mxml/mxml-search.o: __/__/extern/mxml/mxml-search.c.o
@@ -306,7 +306,7 @@ __/__/extern/mxml/mxml-search.o: __/__/extern/mxml/mxml-search.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-search.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-search.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-search.c.o
 .PHONY : __/__/extern/mxml/mxml-search.c.o
 
 __/__/extern/mxml/mxml-search.i: __/__/extern/mxml/mxml-search.c.i
@@ -314,7 +314,7 @@ __/__/extern/mxml/mxml-search.i: __/__/extern/mxml/mxml-search.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-search.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-search.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-search.c.i
 .PHONY : __/__/extern/mxml/mxml-search.c.i
 
 __/__/extern/mxml/mxml-search.s: __/__/extern/mxml/mxml-search.c.s
@@ -322,7 +322,7 @@ __/__/extern/mxml/mxml-search.s: __/__/extern/mxml/mxml-search.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-search.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-search.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-search.c.s
 .PHONY : __/__/extern/mxml/mxml-search.c.s
 
 __/__/extern/mxml/mxml-set.o: __/__/extern/mxml/mxml-set.c.o
@@ -330,7 +330,7 @@ __/__/extern/mxml/mxml-set.o: __/__/extern/mxml/mxml-set.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-set.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-set.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-set.c.o
 .PHONY : __/__/extern/mxml/mxml-set.c.o
 
 __/__/extern/mxml/mxml-set.i: __/__/extern/mxml/mxml-set.c.i
@@ -338,7 +338,7 @@ __/__/extern/mxml/mxml-set.i: __/__/extern/mxml/mxml-set.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-set.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-set.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-set.c.i
 .PHONY : __/__/extern/mxml/mxml-set.c.i
 
 __/__/extern/mxml/mxml-set.s: __/__/extern/mxml/mxml-set.c.s
@@ -346,7 +346,7 @@ __/__/extern/mxml/mxml-set.s: __/__/extern/mxml/mxml-set.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-set.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-set.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-set.c.s
 .PHONY : __/__/extern/mxml/mxml-set.c.s
 
 __/__/extern/mxml/mxml-string.o: __/__/extern/mxml/mxml-string.c.o
@@ -354,7 +354,7 @@ __/__/extern/mxml/mxml-string.o: __/__/extern/mxml/mxml-string.c.o
 
 # target to build an object file
 __/__/extern/mxml/mxml-string.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-string.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-string.c.o
 .PHONY : __/__/extern/mxml/mxml-string.c.o
 
 __/__/extern/mxml/mxml-string.i: __/__/extern/mxml/mxml-string.c.i
@@ -362,7 +362,7 @@ __/__/extern/mxml/mxml-string.i: __/__/extern/mxml/mxml-string.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/mxml-string.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-string.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-string.c.i
 .PHONY : __/__/extern/mxml/mxml-string.c.i
 
 __/__/extern/mxml/mxml-string.s: __/__/extern/mxml/mxml-string.c.s
@@ -370,7 +370,7 @@ __/__/extern/mxml/mxml-string.s: __/__/extern/mxml/mxml-string.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/mxml-string.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/mxml-string.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/mxml-string.c.s
 .PHONY : __/__/extern/mxml/mxml-string.c.s
 
 __/__/extern/mxml/testmxml.o: __/__/extern/mxml/testmxml.c.o
@@ -378,7 +378,7 @@ __/__/extern/mxml/testmxml.o: __/__/extern/mxml/testmxml.c.o
 
 # target to build an object file
 __/__/extern/mxml/testmxml.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/testmxml.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/testmxml.c.o
 .PHONY : __/__/extern/mxml/testmxml.c.o
 
 __/__/extern/mxml/testmxml.i: __/__/extern/mxml/testmxml.c.i
@@ -386,7 +386,7 @@ __/__/extern/mxml/testmxml.i: __/__/extern/mxml/testmxml.c.i
 
 # target to preprocess a source file
 __/__/extern/mxml/testmxml.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/testmxml.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/testmxml.c.i
 .PHONY : __/__/extern/mxml/testmxml.c.i
 
 __/__/extern/mxml/testmxml.s: __/__/extern/mxml/testmxml.c.s
@@ -394,7 +394,7 @@ __/__/extern/mxml/testmxml.s: __/__/extern/mxml/testmxml.c.s
 
 # target to generate assembly for a file
 __/__/extern/mxml/testmxml.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/mxml/testmxml.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/mxml/testmxml.c.s
 .PHONY : __/__/extern/mxml/testmxml.c.s
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.o: __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.o
@@ -402,7 +402,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/list.o: __/__/extern/pfd_sfo_tools/sfo
 
 # target to build an object file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.o
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.o
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.i: __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.i
@@ -410,7 +410,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/list.i: __/__/extern/pfd_sfo_tools/sfo
 
 # target to preprocess a source file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.i
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.i
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.s: __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.s
@@ -418,7 +418,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/list.s: __/__/extern/pfd_sfo_tools/sfo
 
 # target to generate assembly for a file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.s
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/list.c.s
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.o: __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.o
@@ -426,7 +426,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.o: __/__/extern/pfd_sfo_tools/sfop
 
 # target to build an object file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.o
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.o
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.i: __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.i
@@ -434,7 +434,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.i: __/__/extern/pfd_sfo_tools/sfop
 
 # target to preprocess a source file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.i
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.i
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.s: __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.s
@@ -442,7 +442,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.s: __/__/extern/pfd_sfo_tools/sfop
 
 # target to generate assembly for a file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.s
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/sfo.c.s
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.o: __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.o
@@ -450,7 +450,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/util.o: __/__/extern/pfd_sfo_tools/sfo
 
 # target to build an object file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.o
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.o
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.i: __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.i
@@ -458,7 +458,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/util.i: __/__/extern/pfd_sfo_tools/sfo
 
 # target to preprocess a source file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.i
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.i
 
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.s: __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.s
@@ -466,7 +466,7 @@ __/__/extern/pfd_sfo_tools/sfopatcher/src/util.s: __/__/extern/pfd_sfo_tools/sfo
 
 # target to generate assembly for a file
 __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.s
 .PHONY : __/__/extern/pfd_sfo_tools/sfopatcher/src/util.c.s
 
 __/__/extern/tiny-json/tiny-json.o: __/__/extern/tiny-json/tiny-json.c.o
@@ -474,7 +474,7 @@ __/__/extern/tiny-json/tiny-json.o: __/__/extern/tiny-json/tiny-json.c.o
 
 # target to build an object file
 __/__/extern/tiny-json/tiny-json.c.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/tiny-json/tiny-json.c.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/tiny-json/tiny-json.c.o
 .PHONY : __/__/extern/tiny-json/tiny-json.c.o
 
 __/__/extern/tiny-json/tiny-json.i: __/__/extern/tiny-json/tiny-json.c.i
@@ -482,7 +482,7 @@ __/__/extern/tiny-json/tiny-json.i: __/__/extern/tiny-json/tiny-json.c.i
 
 # target to preprocess a source file
 __/__/extern/tiny-json/tiny-json.c.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/tiny-json/tiny-json.c.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/tiny-json/tiny-json.c.i
 .PHONY : __/__/extern/tiny-json/tiny-json.c.i
 
 __/__/extern/tiny-json/tiny-json.s: __/__/extern/tiny-json/tiny-json.c.s
@@ -490,7 +490,7 @@ __/__/extern/tiny-json/tiny-json.s: __/__/extern/tiny-json/tiny-json.c.s
 
 # target to generate assembly for a file
 __/__/extern/tiny-json/tiny-json.c.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/extern/tiny-json/tiny-json.c.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/extern/tiny-json/tiny-json.c.s
 .PHONY : __/__/extern/tiny-json/tiny-json.c.s
 
 __/__/libhijacker/source/notify.o: __/__/libhijacker/source/notify.cpp.o
@@ -498,7 +498,7 @@ __/__/libhijacker/source/notify.o: __/__/libhijacker/source/notify.cpp.o
 
 # target to build an object file
 __/__/libhijacker/source/notify.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/libhijacker/source/notify.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/libhijacker/source/notify.cpp.o
 .PHONY : __/__/libhijacker/source/notify.cpp.o
 
 __/__/libhijacker/source/notify.i: __/__/libhijacker/source/notify.cpp.i
@@ -506,7 +506,7 @@ __/__/libhijacker/source/notify.i: __/__/libhijacker/source/notify.cpp.i
 
 # target to preprocess a source file
 __/__/libhijacker/source/notify.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/libhijacker/source/notify.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/libhijacker/source/notify.cpp.i
 .PHONY : __/__/libhijacker/source/notify.cpp.i
 
 __/__/libhijacker/source/notify.s: __/__/libhijacker/source/notify.cpp.s
@@ -514,7 +514,7 @@ __/__/libhijacker/source/notify.s: __/__/libhijacker/source/notify.cpp.s
 
 # target to generate assembly for a file
 __/__/libhijacker/source/notify.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/__/__/libhijacker/source/notify.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/__/__/libhijacker/source/notify.cpp.s
 .PHONY : __/__/libhijacker/source/notify.cpp.s
 
 source/game_patch_memory.o: source/game_patch_memory.cpp.o
@@ -522,7 +522,7 @@ source/game_patch_memory.o: source/game_patch_memory.cpp.o
 
 # target to build an object file
 source/game_patch_memory.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_memory.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_memory.cpp.o
 .PHONY : source/game_patch_memory.cpp.o
 
 source/game_patch_memory.i: source/game_patch_memory.cpp.i
@@ -530,7 +530,7 @@ source/game_patch_memory.i: source/game_patch_memory.cpp.i
 
 # target to preprocess a source file
 source/game_patch_memory.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_memory.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_memory.cpp.i
 .PHONY : source/game_patch_memory.cpp.i
 
 source/game_patch_memory.s: source/game_patch_memory.cpp.s
@@ -538,7 +538,7 @@ source/game_patch_memory.s: source/game_patch_memory.cpp.s
 
 # target to generate assembly for a file
 source/game_patch_memory.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_memory.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_memory.cpp.s
 .PHONY : source/game_patch_memory.cpp.s
 
 source/game_patch_thread.o: source/game_patch_thread.cpp.o
@@ -546,7 +546,7 @@ source/game_patch_thread.o: source/game_patch_thread.cpp.o
 
 # target to build an object file
 source/game_patch_thread.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_thread.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_thread.cpp.o
 .PHONY : source/game_patch_thread.cpp.o
 
 source/game_patch_thread.i: source/game_patch_thread.cpp.i
@@ -554,7 +554,7 @@ source/game_patch_thread.i: source/game_patch_thread.cpp.i
 
 # target to preprocess a source file
 source/game_patch_thread.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_thread.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_thread.cpp.i
 .PHONY : source/game_patch_thread.cpp.i
 
 source/game_patch_thread.s: source/game_patch_thread.cpp.s
@@ -562,7 +562,7 @@ source/game_patch_thread.s: source/game_patch_thread.cpp.s
 
 # target to generate assembly for a file
 source/game_patch_thread.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_thread.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_thread.cpp.s
 .PHONY : source/game_patch_thread.cpp.s
 
 source/game_patch_xml.o: source/game_patch_xml.cpp.o
@@ -570,7 +570,7 @@ source/game_patch_xml.o: source/game_patch_xml.cpp.o
 
 # target to build an object file
 source/game_patch_xml.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_xml.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_xml.cpp.o
 .PHONY : source/game_patch_xml.cpp.o
 
 source/game_patch_xml.i: source/game_patch_xml.cpp.i
@@ -578,7 +578,7 @@ source/game_patch_xml.i: source/game_patch_xml.cpp.i
 
 # target to preprocess a source file
 source/game_patch_xml.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_xml.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_xml.cpp.i
 .PHONY : source/game_patch_xml.cpp.i
 
 source/game_patch_xml.s: source/game_patch_xml.cpp.s
@@ -586,7 +586,7 @@ source/game_patch_xml.s: source/game_patch_xml.cpp.s
 
 # target to generate assembly for a file
 source/game_patch_xml.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/game_patch_xml.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/game_patch_xml.cpp.s
 .PHONY : source/game_patch_xml.cpp.s
 
 source/main.o: source/main.cpp.o
@@ -594,7 +594,7 @@ source/main.o: source/main.cpp.o
 
 # target to build an object file
 source/main.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/main.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/main.cpp.o
 .PHONY : source/main.cpp.o
 
 source/main.i: source/main.cpp.i
@@ -602,7 +602,7 @@ source/main.i: source/main.cpp.i
 
 # target to preprocess a source file
 source/main.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/main.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/main.cpp.i
 .PHONY : source/main.cpp.i
 
 source/main.s: source/main.cpp.s
@@ -610,7 +610,7 @@ source/main.s: source/main.cpp.s
 
 # target to generate assembly for a file
 source/main.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/main.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
 source/server.o: source/server.cpp.o
@@ -618,7 +618,7 @@ source/server.o: source/server.cpp.o
 
 # target to build an object file
 source/server.cpp.o:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/server.cpp.o
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/server.cpp.o
 .PHONY : source/server.cpp.o
 
 source/server.i: source/server.cpp.i
@@ -626,7 +626,7 @@ source/server.i: source/server.cpp.i
 
 # target to preprocess a source file
 source/server.cpp.i:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/server.cpp.i
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/server.cpp.i
 .PHONY : source/server.cpp.i
 
 source/server.s: source/server.cpp.s
@@ -634,7 +634,7 @@ source/server.s: source/server.cpp.s
 
 # target to generate assembly for a file
 source/server.cpp.s:
-	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/source/server.cpp.s
+	cd /mnt/c/Users/lm/Documents/GitHub/etaHEN-SDK && $(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/source/server.cpp.s
 .PHONY : source/server.cpp.s
 
 # Help Target
@@ -645,7 +645,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... illusion_cheats"
+	@echo "... itemzflow_xml_patches"
 	@echo "... __/__/extern/mxml/mxml-attr.o"
 	@echo "... __/__/extern/mxml/mxml-attr.i"
 	@echo "... __/__/extern/mxml/mxml-attr.s"

@@ -229,96 +229,7 @@ const bool isAlive(const pid_t pid) {
   return false;
 }
 
-const int32_t checkPatchButton(const OrbisPadData *pData) {
-  return (pData->buttons & ORBIS_PAD_BUTTON_SQUARE) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_TRIANGLE);
-}
-
-const int32_t checkFlipRateButton(const OrbisPadData *pData) {
-  return (pData->buttons & ORBIS_PAD_BUTTON_SQUARE) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_CIRCLE);
-}
-
-const int32_t checkKillButton(const OrbisPadData *pData) {
-  return (pData->buttons & ORBIS_PAD_BUTTON_L3) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_R3) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_L1) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_R1) &&
-         (pData->buttons & ORBIS_PAD_BUTTON_SQUARE);
-}
-
-const int32_t check120HzButton(const OrbisPadData *pData) {
-  return (pData->buttons & ORBIS_PAD_BUTTON_CROSS) ||
-         (pData->buttons & ORBIS_PAD_BUTTON_CIRCLE);
-}
-
 int32_t g_foundApp = false;
-int32_t g_doPatchGames = false;
-int32_t g_UniversalFlipRatePatch = false;
-
-void *GamePatch_InputThread(void *unused) {
-  (void)unused;
-  printf_notification("Game Patch Input Thread Started.");
-  int32_t user_id = 0;
-  int32_t pad_handle = 0;
-  int32_t priority = 256;
-  print_ret(sceUserServiceInitialize(&priority));
-  print_ret(sceUserServiceGetForegroundUser(&user_id));
-  cheat_log("priority: 0x%08x\n", priority);
-  cheat_log("user_id: 0x%08x\n", user_id);
-  if (user_id > 0) {
-    print_ret(scePadInit());
-    pad_handle = scePadOpen(user_id, 0, 0, nullptr);
-    cheat_log("scePadOpen: 0x%08x\n", pad_handle);
-    print_ret(scePadSetProcessPrivilege(1));
-  } else {
-    printf_notification(
-        "Failed to obtain current user id! Pad functions will not work.");
-    user_id = 0;
-  }
-  int32_t prevTogglePressed = false;
-  int32_t prevTogglePressed2 = false;
-  while (g_game_patch_thread_running) {
-    OrbisPadData pData{};
-    if (pad_handle && !g_foundApp) {
-      int32_t ret = scePadReadState(pad_handle, &pData);
-      if (ret == 0 && pad_handle > 0 && pData.connected) {
-        int32_t currentTogglePressed{};
-        int32_t currentTogglePressed2{};
-        currentTogglePressed = checkPatchButton(&pData);
-        if (currentTogglePressed && !prevTogglePressed) {
-          g_doPatchGames = !g_doPatchGames;
-          printf_notification("User requested to patch games: %s",
-                              g_doPatchGames ? "true" : "false");
-        }
-        prevTogglePressed = currentTogglePressed;
-        currentTogglePressed2 = checkFlipRateButton(&pData);
-        if (currentTogglePressed2 && !prevTogglePressed2) {
-          g_UniversalFlipRatePatch = !g_UniversalFlipRatePatch;
-          printf_notification(
-              "User requested to always patch fliprate to 0: %s",
-              g_UniversalFlipRatePatch ? "true" : "false");
-        }
-        prevTogglePressed2 = currentTogglePressed2;
-        if (checkKillButton(&pData)) {
-          g_game_patch_thread_running = false;
-          continue;
-        }
-        g_isPatch120Hz = false;
-        if (check120HzButton(&pData)) {
-          g_isPatch120Hz = true;
-        }
-      }
-    }
-    usleep(1000);
-  }
-  if (pad_handle) {
-    print_ret(scePadClose(pad_handle));
-  }
-  printf_notification("Game Patch Input thread has requested to stop");
-  pthread_exit(nullptr);
-  return nullptr;
-}
 
 static void SuspendApp(pid_t pid) {
   sceKernelPrepareToSuspendProcess(pid);
@@ -336,22 +247,6 @@ static void ResumeApp(pid_t pid) {
 extern "C" int sceSystemServiceGetAppIdOfRunningBigApp();
 extern "C" int sceSystemServiceGetAppTitleId(int app_id, char *title_id);
 
-bool Get_Running_App_TID(String &title_id, int &BigAppid) {
-  char tid[255];
-  BigAppid = sceSystemServiceGetAppIdOfRunningBigApp();
-  if (BigAppid < 0) {
-    return false;
-  }
-  (void)memset(tid, 0, sizeof tid);
-
-  if (sceSystemServiceGetAppTitleId(BigAppid, &tid[0]) != 0) {
-    return false;
-  }
-
-  title_id = String(tid);
-
-  return true;
-}
 int32_t patch_SetFlipRate(const Hijacker &hijacker, const pid_t pid) {
   static constexpr Nid sceVideoOutSetFlipRate_Nid{"CBiu4mCE1DA"};
   UniquePtr<SharedLib> lib = hijacker.getLib("libSceVideoOut.sprx"_sv);
@@ -385,83 +280,37 @@ int32_t patch_SetFlipRate(const Hijacker &hijacker, const pid_t pid) {
   return 0;
 }
 
+
+bool Get_Running_App_TID(String &title_id, int &BigAppid) {
+  char tid[255];
+  BigAppid = sceSystemServiceGetAppIdOfRunningBigApp();
+  if (BigAppid < 0) {
+    return false;
+  }
+  (void)memset(tid, 0, sizeof tid);
+
+  if (sceSystemServiceGetAppTitleId(BigAppid, &tid[0]) != 0) {
+    return false;
+  }
+
+  title_id = String(tid);
+
+  return true;
+}
+
 #include "game_patch_xml.hpp"
 
 void *GamePatch_Thread(void *unused) {
   (void)unused;
-  printf_notification("Game Patch thread running.\nBuilt: " __DATE__
+  printf_notification("XML Patch thread running.\nBuilt: " __DATE__
                       " @ " __TIME__);
   makeDefaultXml_List();
-  int32_t is120HzUsable = false;
-  FlipRate_ConfigureOutput_Ptr = 0;
-  FlipRate_isVideoModeSupported_Ptr = 0;
-  int32_t module_load = 0;
-  constexpr uint32_t ORBIS_SYSMODULE_INTERNAL_VIDEO_OUT = 0x80000022;
-  module_load =
-      sceSysmoduleLoadModuleInternal(ORBIS_SYSMODULE_INTERNAL_VIDEO_OUT);
-  cheat_log("sceSysmoduleLoadModuleInternal: 0x%08x\n", module_load);
-  if (uintptr_t(sceVideoOutOpen) && uintptr_t(sceVideoOutIsOutputSupported) &&
-      uintptr_t(sceVideoOutConfigureOutput)) {
-    FlipRate_ConfigureOutput_Ptr =
-        uintptr_t(sceVideoOutConfigureOutput) - uintptr_t(sceVideoOutOpen);
-    FlipRate_isVideoModeSupported_Ptr =
-        uintptr_t(sceVideoOutIsOutputSupported) - uintptr_t(sceVideoOutOpen);
-    cheat_log("sceVideoOutSetFlipRate: 0x%p\n", sceVideoOutOpen);
-    cheat_log("sceVideoOutConfigureOutput: 0x%p\n", sceVideoOutConfigureOutput);
-    cheat_log("sceVideoOutIsOutputSupported: 0x%p\n",
-            sceVideoOutIsOutputSupported);
-    cheat_log("FlipRate_ConfigureOutput_Ptr: 0x%lx\n",
-            FlipRate_ConfigureOutput_Ptr);
-    cheat_log("FlipRate_isVideoModeSupported_Ptr: 0x%lx\n",
-            FlipRate_isVideoModeSupported_Ptr);
-  }
-  module_load =
-      sceSysmoduleUnloadModuleInternal(ORBIS_SYSMODULE_INTERNAL_VIDEO_OUT);
-  cheat_log("sceSysmoduleUnloadModuleInternal: 0x%08x\n", module_load);
-  if (FlipRate_ConfigureOutput_Ptr > 0 &&
-      FlipRate_isVideoModeSupported_Ptr > 0) {
-    is120HzUsable = true;
-  } else {
-    is120HzUsable = false;
-  }
-
 
   g_game_patch_thread_running = true;
-  pid_t shellcore_pid = 0;
-
-
-  int32_t doPatchGames = true;
-  {
-    const UniquePtr<Hijacker> executable =
-        Hijacker::getHijacker("SceShellCore"_sv);
-    uintptr_t text_base = 0;
-    uint64_t text_size = 0;
-    if (executable) {
-      text_base = executable->getEboot()->getTextSection()->start();
-      text_size = executable->getEboot()->getTextSection()->sectionLength();
-      shellcore_pid = executable->getPid();
-      if (is120HzUsable) {
-        if (patchShellCore(shellcore_pid, text_base, text_size)) {
-          printf_notification("Patches for ShellCore has been installed.");
-        } else {
-          printf_notification("Failed to install patches for ShellCore.");
-        }
-      }
-    } else {
-      printf_notification("SceShellCore not found");
-    }
-  }
-
   cheat_log("Game Patch thread running.\nBuilt: " __DATE__ " @ " __TIME__);
   while (g_game_patch_thread_running) {
     String tid;
     int appid = 0;
-    if (!doPatchGames) {
-      cheat_log("doPatchGames is false");
-      usleep(1000);
-      continue;
-    }
-
     if (!Get_Running_App_TID(tid, appid)) {
       if (g_foundApp)
         cheat_log("app is no longer running");
@@ -565,9 +414,6 @@ for (auto p: dbg::getProcesses()) {
       }
       if (!fliprate_game_found) {
         ResumeApp(app_pid);
-        if (g_UniversalFlipRatePatch) {
-          patch_SetFlipRate(*executable, app_pid);
-        }
       }
     } else if (text_base && !g_foundApp && (startsWith(app_id, "PPSA"))) {
       char app_ver[APP_VER_SIZE]{};       // `contentVersion`
@@ -608,20 +454,10 @@ for (auto p: dbg::getProcesses()) {
       }
       if (!fliprate_game_found) {
         ResumeApp(app_pid);
-        if (g_UniversalFlipRatePatch) {
-          patch_SetFlipRate(*executable, app_pid);
-        }
       }
     }
   }
 
-  if (shellcore_pid) {
-    if (UnPatchShellCore(shellcore_pid)) {
-      printf_notification("Patches for ShellCore has been uninstalled.");
-    } else {
-      printf_notification("Failed to uninstall patches for ShellCore.");
-    }
-  }
   printf_notification("Game Patch thread has requested to stop");
   pthread_exit(nullptr);
   return nullptr;

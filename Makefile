@@ -146,17 +146,17 @@ util_daemon/fast:
 .PHONY : util_daemon/fast
 
 #=============================================================================
-# Target rules for targets named illusion_cheats
+# Target rules for targets named itemzflow_xml_patches
 
 # Build rule for target.
-illusion_cheats: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 illusion_cheats
-.PHONY : illusion_cheats
+itemzflow_xml_patches: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 itemzflow_xml_patches
+.PHONY : itemzflow_xml_patches
 
 # fast build rule for target.
-illusion_cheats/fast:
-	$(MAKE) $(MAKESILENT) -f Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build.make Plugin_samples/Illusion_cheats/CMakeFiles/illusion_cheats.dir/build
-.PHONY : illusion_cheats/fast
+itemzflow_xml_patches/fast:
+	$(MAKE) $(MAKESILENT) -f Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build.make Plugin_samples/itemzflow_xml_patches/CMakeFiles/itemzflow_xml_patches.dir/build
+.PHONY : itemzflow_xml_patches/fast
 
 #=============================================================================
 # Target rules for targets named PS5Debug
@@ -171,6 +171,45 @@ PS5Debug/fast:
 	$(MAKE) $(MAKESILENT) -f Plugin_samples/PS5Debug/CMakeFiles/PS5Debug.dir/build.make Plugin_samples/PS5Debug/CMakeFiles/PS5Debug.dir/build
 .PHONY : PS5Debug/fast
 
+#=============================================================================
+# Target rules for targets named Game_Plugin_Loader
+
+# Build rule for target.
+Game_Plugin_Loader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Game_Plugin_Loader
+.PHONY : Game_Plugin_Loader
+
+# fast build rule for target.
+Game_Plugin_Loader/fast:
+	$(MAKE) $(MAKESILENT) -f Plugin_samples/Game_Plugin_Loader/CMakeFiles/Game_Plugin_Loader.dir/build.make Plugin_samples/Game_Plugin_Loader/CMakeFiles/Game_Plugin_Loader.dir/build
+.PHONY : Game_Plugin_Loader/fast
+
+#=============================================================================
+# Target rules for targets named Error_Disabling
+
+# Build rule for target.
+Error_Disabling: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Error_Disabling
+.PHONY : Error_Disabling
+
+# fast build rule for target.
+Error_Disabling/fast:
+	$(MAKE) $(MAKESILENT) -f Plugin_samples/Error_Disabling/CMakeFiles/Error_Disabling.dir/build.make Plugin_samples/Error_Disabling/CMakeFiles/Error_Disabling.dir/build
+.PHONY : Error_Disabling/fast
+
+#=============================================================================
+# Target rules for targets named Remote_Package_Installer
+
+# Build rule for target.
+Remote_Package_Installer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Remote_Package_Installer
+.PHONY : Remote_Package_Installer
+
+# fast build rule for target.
+Remote_Package_Installer/fast:
+	$(MAKE) $(MAKESILENT) -f Plugin_samples/Remote_Package_Installer/CMakeFiles/Remote_Package_Installer.dir/build.make Plugin_samples/Remote_Package_Installer/CMakeFiles/Remote_Package_Installer.dir/build
+.PHONY : Remote_Package_Installer/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -179,9 +218,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... Error_Disabling"
+	@echo "... Game_Plugin_Loader"
 	@echo "... PS5Debug"
+	@echo "... Remote_Package_Installer"
 	@echo "... hijacker"
-	@echo "... illusion_cheats"
+	@echo "... itemzflow_xml_patches"
 	@echo "... util_daemon"
 .PHONY : help
 

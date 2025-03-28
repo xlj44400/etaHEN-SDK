@@ -6,11 +6,11 @@
 
 cmake_minimum_required (VERSION 3.20)
 
-set(basename "illusion_cheats")
+set(basename "Error_Disabling")
 project(${basename} C CXX)
 
-set(PLUGIN_TITLE_ID "ILLU00000")
-set(PLUGIN_VERSION "1.00")
+set(PLUGIN_TITLE_ID "EORR37000")
+set(PLUGIN_VERSION "1.04")
 
 # Language Standard Defaults
 set(CMAKE_C_STANDARD 17)
@@ -53,17 +53,17 @@ target_compile_options(${PROJECT_NAME} PUBLIC
 
 message("========== build: ${PROJECT_NAME} ==========")
 set(D_SRC ${D_CWD}/source)
-
-file(GLOB SrcFiles ${D_SRC}/../../../libhijacker/source/notify.cpp ${D_SRC}/*.c ${D_SRC}/*.cpp ${D_SRC}/*.h ${D_SRC}/*.hpp ${D_SRC}/*.s ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.c ${D_SRC}/../../libelfloader/source/ ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.h ${D_SRC}/../../../extern/tiny-json/*.c ${D_SRC}/../../../extern/tiny-json/*.h ${D_SRC}/../../../extern/mxml/*.c ${D_SRC}/../../../extern/mxml/*.h)
+include_directories	(SYSTEM "${D_SRC}/../../../libelfloader/source/")
+file(GLOB SrcFiles ${D_SRC}/*.c ${D_SRC}/*.cpp ${D_SRC}/*.h ${D_SRC}/*.hpp ${D_SRC}/*.s ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.c ${D_SRC}/../../libelfloader/source/ ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.h ${D_SRC}/../../../extern/tiny-json/*.c ${D_SRC}/../../../extern/tiny-json/*.h ${D_SRC}/../../../extern/mxml/*.c ${D_SRC}/../../../extern/mxml/*.h)
 
 set(CMAKE_C_FLAGS "--target=x86_64-sie-ps5 -DPPR -DPS5 -DPS5_FW_VERSION=${V_FW} ")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-keyword-macro -fPIC -fPIE -march=znver2 -Wall -Werror -fstack-protector-all")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -DDEBUG -gfull -gdwarf-2 -O0 -pedantic -pedantic-errors")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 ")
-
 add_custom_command(TARGET ${basename}
                    POST_BUILD
                    COMMAND python3 "${CMAKE_SOURCE_DIR}/lib/make_plugin.py" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${basename}.elf" "${PLUGIN_TITLE_ID}" "${PLUGIN_VERSION}"
+                   COMMAND ${CMAKE_COMMAND} -E remove "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${basename}.elf"
                    COMMENT "Finishing Plugin"
                    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 

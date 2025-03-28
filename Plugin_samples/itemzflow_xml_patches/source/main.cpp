@@ -77,22 +77,16 @@ int main()
 
 	unlink("/data/etaHEN/cheat_plugin.log");
 
-	printf_notification("The cheats plugin has started successfully.\nBuild mode: (" BUILD_MSG ")\n"
-						"Original project:\nhttps://github.com/astrelsky/libhijacker");
-	printf_notification("libhijacker - astrelsky\n"
-						"Fork with Game Patch Support - illusion\n"
-						"Check Readme for supported titles and it's versions.");
+	printf_notification("The Itemzflow XML Cheats plugin has started\n%s\nSpecial Thanks to illusion", BUILD_MSG);
 	// remove this when it's possible to load elf into games at boot
 	pthread_t game_patch_thread_id = nullptr;
 	pthread_create(&game_patch_thread_id, nullptr, GamePatch_Thread, nullptr);
-	pthread_t game_patch_input_thread_id = nullptr;
-	pthread_create(&game_patch_input_thread_id, nullptr, GamePatch_InputThread, nullptr);
 
 	g_game_patch_thread_running = true;
 #ifdef RESTMODE
 	while (g_game_patch_thread_running)
 	{
-		sleep(1);
+		sleep(0x420);
 	}
 #else
 

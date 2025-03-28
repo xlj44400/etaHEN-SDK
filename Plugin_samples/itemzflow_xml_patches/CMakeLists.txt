@@ -1,16 +1,11 @@
-###################################################################################################
-# PS5SDK - Example: pipe pirate
-# Uses the read/write primitive to read and write some kernel data.
-# @authors ChendoChap, Specter, Znullptr, LM for etaHEN SDK
-###################################################################################################
 
 cmake_minimum_required (VERSION 3.20)
 
-set(basename "PS5Debug")
+set(basename "itemzflow_xml_patches")
 project(${basename} C CXX)
 
-set(PLUGIN_TITLE_ID "DEBU00000")
-set(PLUGIN_VERSION "1.00")
+set(PLUGIN_TITLE_ID "XMLS00001")
+set(PLUGIN_VERSION "1.02")
 
 # Language Standard Defaults
 set(CMAKE_C_STANDARD 17)
@@ -53,7 +48,8 @@ target_compile_options(${PROJECT_NAME} PUBLIC
 
 message("========== build: ${PROJECT_NAME} ==========")
 set(D_SRC ${D_CWD}/source)
-file(GLOB SrcFiles ${D_SRC}/*.c ${D_SRC}/*.cpp ${D_SRC}/*.h ${D_SRC}/*.hpp ${D_SRC}/*.s ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.c ${D_SRC}/../../libelfloader/source/ ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.h ${D_SRC}/../../../extern/tiny-json/*.c ${D_SRC}/../../../extern/tiny-json/*.h ${D_SRC}/../../../extern/mxml/*.c ${D_SRC}/../../../extern/mxml/*.h)
+
+file(GLOB SrcFiles ${D_SRC}/../../../libhijacker/source/notify.cpp ${D_SRC}/*.c ${D_SRC}/*.cpp ${D_SRC}/*.h ${D_SRC}/*.hpp ${D_SRC}/*.s ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.c ${D_SRC}/../../libelfloader/source/ ${D_SRC}/../../../extern/pfd_sfo_tools/sfopatcher/src/*.h ${D_SRC}/../../../extern/tiny-json/*.c ${D_SRC}/../../../extern/tiny-json/*.h ${D_SRC}/../../../extern/mxml/*.c ${D_SRC}/../../../extern/mxml/*.h)
 
 set(CMAKE_C_FLAGS "--target=x86_64-sie-ps5 -DPPR -DPS5 -DPS5_FW_VERSION=${V_FW} ")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-keyword-macro -fPIC -fPIE -march=znver2 -Wall -Werror -fstack-protector-all")
@@ -63,14 +59,13 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 ")
 add_custom_command(TARGET ${basename}
                    POST_BUILD
                    COMMAND python3 "${CMAKE_SOURCE_DIR}/lib/make_plugin.py" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${basename}.elf" "${PLUGIN_TITLE_ID}" "${PLUGIN_VERSION}"
-                   COMMAND ${CMAKE_COMMAND} -E remove "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${basename}.elf"                  
+                   COMMAND ${CMAKE_COMMAND} -E remove "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${basename}.elf"
                    COMMENT "Finishing Plugin"
                    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 target_sources(${PROJECT_NAME} PRIVATE ${SrcFiles})
 target_include_directories(${PROJECT_NAME} PRIVATE "${D_CWD}/../include")
-target_include_directories(${PROJECT_NAME} PRIVATE "${D_CWD}/include")
 target_include_directories(${PROJECT_NAME} PRIVATE "${D_CWD}/../shared/include")
 target_link_directories	(${PROJECT_NAME} PUBLIC "${PROJECT_ROOT}/lib")
-target_link_libraries	(${PROJECT_NAME} PUBLIC SceLibcInternal kernel_sys SceNet)
+target_link_libraries	(${PROJECT_NAME} PUBLIC hijacker SceLibcInternal SceSystemService SceNet SceSysmodule SceUserService SceNetCtl SceSysCore ScePad SceVideoOut kernel_sys SceAppInstUtil elfloader)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
