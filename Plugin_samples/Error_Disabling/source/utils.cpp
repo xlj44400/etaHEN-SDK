@@ -223,8 +223,6 @@ bool patchShellCore() {
       offset = 0x899166;
       break;
     case V320:
-      offset = 0x89945B;
-      break;
     case V321:
       offset = 0x899456;
       break;
