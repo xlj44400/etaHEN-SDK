@@ -90,6 +90,9 @@ namespace offsets {
             case V600: case V602: case V650:
                 allprocOffset =  0x2869D20;
                 break;
+            case V700: case V701: case V720: case V740: case V760: case V761:
+                allprocOffset =  0x2859D50;
+                break;
             default:
                 printf("Unsupported firmware version: 0x%x\n", getSystemSwVersion() & VERSION_MASK);
                 allprocOffset = -1;
@@ -140,7 +143,7 @@ namespace offsets {
             case V600: case V602: case V650:
                 return 0x65968EC + 0x24;
             case V700: case V701: case V720: case V740: case V760: case V761:
-                return 0x0AC8064 + 0x24;
+                return  0x0AC8064 + 0x24;
             default:
                 printf("Unsupported firmware version: 0x%x\n", getSystemSwVersion() & VERSION_MASK);
                 return -1;
