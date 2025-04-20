@@ -69,7 +69,7 @@ int32_t sceSysmoduleUnloadModuleInternal(uint32_t moduleId);
 int32_t sceVideoOutOpen();
 int32_t sceVideoOutConfigureOutput();
 int32_t sceVideoOutIsOutputSupported();
-int sceKernelGetAppInfo(int g_title_id, char* name);
+int sceKernelGetProcessName(int pid, char* name);
 }
 
 extern uint32_t FlipRate_ConfigureOutput_Ptr;
@@ -327,7 +327,7 @@ void *GamePatch_Thread(void *unused) {
     }
 
     pid_t app_pid = 0;
-    char proc_name[255]{};
+    char proc_name[255] = { 0};
 #if 0
 for (auto p: dbg::getProcesses()) {
 
@@ -346,10 +346,11 @@ for (auto p: dbg::getProcesses()) {
 
       if (appid == bappid) {
         app_pid = j; // APP PID NOT TO BE CONFUSED WITH APPID
-       if(sceKernelGetAppInfo(app_pid, &proc_name[0]) < 0) {
-          cheat_log("sceKernelGetAppInfo failed for %s (%d)", tid.c_str(), app_pid);
+        if(sceKernelGetProcessName(app_pid, &proc_name[0]) < 0) {
+          cheat_log("sceKernelGetProcessName failed for %s (%d)", tid.c_str(), app_pid);
           continue;
         }
+        cheat_log("Found %s (%d)", proc_name, app_pid);
         
         break;
       }
@@ -399,7 +400,7 @@ for (auto p: dbg::getProcesses()) {
       GameInfo.image_size = text_size;
       strcpy(GameInfo.titleID, g_title_id);
       strcpy(GameInfo.titleVersion, app_ver);
-      strcpy(GameInfo.ImageSelf, proc_name);
+      strcpy(GameInfo.ImageSelf, &proc_name[0]);
       GameInfo.app_mode = PS4_APP;
       Xml_ParseGamePatch(&GameInfo);
       ResumeApp(app_pid);
@@ -439,7 +440,7 @@ for (auto p: dbg::getProcesses()) {
       GameInfo.image_size = text_size;
       strcpy(GameInfo.titleID, g_title_id);
       strcpy(GameInfo.titleVersion, app_ver);
-      strcpy(GameInfo.ImageSelf, proc_name);
+      strcpy(GameInfo.ImageSelf, &proc_name[0]);
       GameInfo.app_mode = PS5_APP;
       Xml_ParseGamePatch(&GameInfo);
       ResumeApp(app_pid);
