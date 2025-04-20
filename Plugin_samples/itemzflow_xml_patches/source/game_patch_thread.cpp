@@ -345,6 +345,7 @@ for (auto p: dbg::getProcesses()) {
         continue;
 
       if (appid == bappid) {
+        app_pid = j; // APP PID NOT TO BE CONFUSED WITH APPID
        if(sceKernelGetAppInfo(app_pid, &proc_name[0]) < 0) {
           cheat_log("sceKernelGetAppInfo failed for %s (%d)", tid.c_str(), app_pid);
           continue;
