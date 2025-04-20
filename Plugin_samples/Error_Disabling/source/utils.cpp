@@ -3,6 +3,8 @@
 #include <nid.hpp>
 #include <fcntl.h>
 #include <string>
+#include <sys/sysctl.h>
+extern "C"     int sceKernelGetProcessName(int pid, char *out);
 void write_log(const char* text)
 {
 	int text_len = printf("%s", text);
@@ -167,9 +169,65 @@ uint8_t *PatternScan(const uint64_t module_base, const uint64_t module_size,
 
 pid_t g_ShellCorePid = 0;
 
+static pid_t find_pid(const char *name) {
+  int mib[4] = {1, 14, 8, 0};
+  pid_t pid = -1;
+  size_t buf_size;
+  uint8_t *buf;
+
+  if (sysctl(mib, 4, 0, &buf_size, 0, 0)) {
+      perror("sysctl");
+      return -1;
+  }
+
+  if (!(buf = (uint8_t *)malloc(buf_size))) {
+      perror("malloc");
+      return -1;
+  }
+
+  if (sysctl(mib, 4, buf, &buf_size, 0, 0)) {
+      perror("sysctl");
+      free(buf);
+      return -1;
+  }
+
+  for (uint8_t *ptr = buf; ptr < (buf + buf_size);) {
+      int ki_structsize = *(int *)ptr;
+      pid_t ki_pid = *(pid_t *)&ptr[72];
+      char *ki_tdname = (char *)&ptr[447];
+
+      ptr += ki_structsize;
+      if (strcmp(ki_tdname, name) == 0) {
+          printf("[MATCH] ki_pid: %d, ki_tdname: %s\n", ki_pid, ki_tdname);
+          pid = ki_pid;
+          break;
+      }
+  }
+
+  free(buf);
+  return pid;
+}
+
+int get_shellcore_pid() {
+  int pid = -1;
+  size_t NumbOfProcs = 9999;
+
+  for (int j = 0; j <= NumbOfProcs; j++) {
+      char tmp_buf[500];
+      memset(tmp_buf, 0, sizeof(tmp_buf));
+      sceKernelGetProcessName(j, tmp_buf);
+      if (strcmp("SceShellCore", tmp_buf) == 0) {
+          pid = j;
+          break;
+      }
+  }
+
+  return pid == -1 ? find_pid("SceShellCore") : pid;
+}
+
 bool patchShellCore() {
-  const UniquePtr<Hijacker> executable =
-      Hijacker::getHijacker("SceShellCore"_sv);
+
+  const UniquePtr<Hijacker> executable = Hijacker::getHijacker(get_shellcore_pid());
   uintptr_t shellcore_base = 0;
   uint64_t shellcore_size = 0;
   if (executable) {

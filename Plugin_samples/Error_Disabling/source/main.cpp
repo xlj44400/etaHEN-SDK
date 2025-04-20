@@ -6,6 +6,7 @@ void sig_handler(int signo)
 {
 	printf_notification("the error disabler plugin has crashed with signal %d\nif you need it you can relaunch via the etaHEN toolbox in debug settings", signo);
 	printBacktraceForCrash();
+	exit(-1);
 }
 
 uintptr_t kernel_base = 0;

@@ -197,19 +197,6 @@ Error_Disabling/fast:
 	$(MAKE) $(MAKESILENT) -f Plugin_samples/Error_Disabling/CMakeFiles/Error_Disabling.dir/build.make Plugin_samples/Error_Disabling/CMakeFiles/Error_Disabling.dir/build
 .PHONY : Error_Disabling/fast
 
-#=============================================================================
-# Target rules for targets named Remote_Package_Installer
-
-# Build rule for target.
-Remote_Package_Installer: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Remote_Package_Installer
-.PHONY : Remote_Package_Installer
-
-# fast build rule for target.
-Remote_Package_Installer/fast:
-	$(MAKE) $(MAKESILENT) -f Plugin_samples/Remote_Package_Installer/CMakeFiles/Remote_Package_Installer.dir/build.make Plugin_samples/Remote_Package_Installer/CMakeFiles/Remote_Package_Installer.dir/build
-.PHONY : Remote_Package_Installer/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -221,7 +208,6 @@ help:
 	@echo "... Error_Disabling"
 	@echo "... Game_Plugin_Loader"
 	@echo "... PS5Debug"
-	@echo "... Remote_Package_Installer"
 	@echo "... hijacker"
 	@echo "... itemzflow_xml_patches"
 	@echo "... util_daemon"

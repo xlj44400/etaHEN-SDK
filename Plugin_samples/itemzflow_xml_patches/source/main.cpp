@@ -50,7 +50,7 @@ void sig_handler(int signo)
 {
 	printf_notification("Cheats plugin has crashed with signal %d", signo);
 	printBacktraceForCrash();
-    sceSystemServiceLoadExec("exit", nullptr);
+    exit(-1);
 }
 
 #include "game_patch_xml_cfg.hpp"
@@ -63,9 +63,13 @@ int main()
 	sigemptyset(&new_SIG_action.sa_mask);
 	new_SIG_action.sa_flags = 0;
 
-	for (int i = 0; i < 12; i++){
-	  	sigaction(i, &new_SIG_action, NULL);
-	}
+	
+	sigaction(11, &new_SIG_action, NULL);
+	sigaction(10, &new_SIG_action, NULL);
+	sigaction(12, &new_SIG_action, NULL);
+	sigaction(6, &new_SIG_action, NULL);
+	sigaction(7, &new_SIG_action, NULL);
+	
 
 	mkdir(BASE_ETAHEN_PATCH_PATH, 0777);
 	mkdir(BASE_ETAHEN_PATCH_SETTINGS_PATH, 0777);

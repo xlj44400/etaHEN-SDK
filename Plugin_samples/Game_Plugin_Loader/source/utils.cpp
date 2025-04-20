@@ -1,4 +1,5 @@
 #include "utils.hpp"
+#include <cstdio>
 #include <cstring>
 #include <nid.hpp>
 #include <fcntl.h>
@@ -47,7 +48,6 @@ bool Is_Game_Running(int &BigAppid, const char* title_id)
 	{
 		return false;
 	}
-	(void)memset(tid, 0, sizeof tid);
 
 	if (sceSystemServiceGetAppTitleId(BigAppid, &tid[0]) != 0)
 	{
@@ -56,7 +56,7 @@ bool Is_Game_Running(int &BigAppid, const char* title_id)
 
     if(std::string (tid) == std::string(title_id))
 	{
-	   plugin_log("%s is running, appid 0x%X", BigAppid, title_id);
+	   plugin_log("%s is running, appid 0x%X", title_id, BigAppid);
        return true;
 	}
 

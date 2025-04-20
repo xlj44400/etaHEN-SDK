@@ -69,6 +69,7 @@ int32_t sceSysmoduleUnloadModuleInternal(uint32_t moduleId);
 int32_t sceVideoOutOpen();
 int32_t sceVideoOutConfigureOutput();
 int32_t sceVideoOutIsOutputSupported();
+int sceKernelGetAppInfo(int g_title_id, char* name);
 }
 
 extern uint32_t FlipRate_ConfigureOutput_Ptr;
@@ -87,7 +88,7 @@ bool if_exists(const char *path) {
   return stat(path, &buffer) == 0;
 }
 extern "C" {
-int sceSystemServiceGetAppTitleId(int app_id, char *title_id);
+int sceSystemServiceGetAppTitleId(int g_title_id, char *title_id);
 int _sceApplicationGetAppId(int pid, int *appid);
 }
 static int32_t get_app_info(const char *title_id, char *out_app_ver,
@@ -245,7 +246,7 @@ static void ResumeApp(pid_t pid) {
   sceKernelResumeProcess(pid);
 }
 extern "C" int sceSystemServiceGetAppIdOfRunningBigApp();
-extern "C" int sceSystemServiceGetAppTitleId(int app_id, char *title_id);
+extern "C" int sceSystemServiceGetAppTitleId(int g_title_id, char *title_id);
 
 int32_t patch_SetFlipRate(const Hijacker &hijacker, const pid_t pid) {
   static constexpr Nid sceVideoOutSetFlipRate_Nid{"CBiu4mCE1DA"};
@@ -326,7 +327,7 @@ void *GamePatch_Thread(void *unused) {
     }
 
     pid_t app_pid = 0;
-    String proc_name;
+    char proc_name[255]{};
 #if 0
 for (auto p: dbg::getProcesses()) {
 
@@ -344,11 +345,11 @@ for (auto p: dbg::getProcesses()) {
         continue;
 
       if (appid == bappid) {
-        app_pid = j;
-        const auto app = getProc(app_pid);
-        if (!app)
+       if(sceKernelGetAppInfo(app_pid, &proc_name[0]) < 0) {
+          cheat_log("sceKernelGetAppInfo failed for %s (%d)", tid.c_str(), app_pid);
           continue;
-        proc_name = dbg::ProcessInfo(app_pid).name();
+        }
+        
         break;
       }
     }
@@ -371,43 +372,42 @@ for (auto p: dbg::getProcesses()) {
     // const auto app = getProc(app_pid);
 
     // cheat_log("Checking %s (%d)", tid.c_str(), app_pid);
-    const char *app_id = tid.c_str();
-    const char *process_name_c_str = proc_name.c_str();
+    const char *g_title_id = tid.c_str();
     if (text_base && !g_foundApp &&
-        (startsWith(app_id, "CUSA") || startsWith(app_id, "PCAS") ||
-         startsWith(app_id, "PCJS"))) {
+        (startsWith(g_title_id, "CUSA") || startsWith(g_title_id, "PCAS") ||
+         startsWith(g_title_id, "PCJS"))) {
       char app_ver[APP_VER_SIZE]{};
       char master_ver[MASTER_VER_SIZE]{};
       char content_id[CONTENT_ID_SIZE]{};
       int32_t ret =
-          get_app_info(app_id, app_ver, master_ver, content_id, PS4_APP);
+          get_app_info(g_title_id, app_ver, master_ver, content_id, PS4_APP);
       if (ret != 0) {
         // something went wrong
-        cheat_log("get_app_info(%s) failed! %d", app_id, ret);
+        cheat_log("get_app_info(%s) failed! %d", g_title_id, ret);
         continue;
       } else if (ret == 0) {
         g_foundApp = true;
       }
-      cheat_log("suspending app %s", app_id);
+      cheat_log("suspending app %s", g_title_id);
       SuspendApp(app_pid);
-      cheat_log("app %s suspended", app_id);
+      cheat_log("app %s suspended", g_title_id);
       // check xml database
       GamePatchInfo GameInfo{};
       GameInfo.image_pid = app_pid;
       GameInfo.image_base = text_base;
       GameInfo.image_size = text_size;
-      strcpy(GameInfo.titleID, app_id);
+      strcpy(GameInfo.titleID, g_title_id);
       strcpy(GameInfo.titleVersion, app_ver);
-      strcpy(GameInfo.ImageSelf, process_name_c_str);
+      strcpy(GameInfo.ImageSelf, proc_name);
       GameInfo.app_mode = PS4_APP;
       Xml_ParseGamePatch(&GameInfo);
       ResumeApp(app_pid);
-      cheat_log("app %s resumed", app_id);
+      cheat_log("app %s resumed", g_title_id);
       int32_t fliprate_game_found = false;
-      if (Xml_parseTitleID_FliprateList(app_id)) {
+      if (Xml_parseTitleID_FliprateList(g_title_id)) {
         printf_notification("Title ID found in universal fliprate list:\n%s",
-                            app_id);
-        cheat_log("Flipped %s", app_id);
+                            g_title_id);
+        cheat_log("Flipped %s", g_title_id);
         ResumeApp(app_pid);
         patch_SetFlipRate(*executable, app_pid);
         fliprate_game_found = true;
@@ -415,39 +415,39 @@ for (auto p: dbg::getProcesses()) {
       if (!fliprate_game_found) {
         ResumeApp(app_pid);
       }
-    } else if (text_base && !g_foundApp && (startsWith(app_id, "PPSA"))) {
+    } else if (text_base && !g_foundApp && (startsWith(g_title_id, "PPSA"))) {
       char app_ver[APP_VER_SIZE]{};       // `contentVersion`
       char master_ver[MASTER_VER_SIZE]{}; // `masterVersion`
       char content_id[CONTENT_ID_SIZE]{}; // `contentId`
       int32_t ret =
-          get_app_info(app_id, app_ver, master_ver, content_id, PS5_APP);
+          get_app_info(g_title_id, app_ver, master_ver, content_id, PS5_APP);
       if (ret != 0) {
         // something went wrong
-        printf_notification("get_app_info(%s) failed! %d", app_id, ret);
+        printf_notification("get_app_info(%s) failed! %d", g_title_id, ret);
         continue;
       } else if (ret == 0) {
         g_foundApp = true;
       }
-      cheat_log("suspending app %s", app_id);
+      cheat_log("suspending app %s", g_title_id);
       SuspendApp(app_pid);
-      cheat_log("app %s suspended", app_id);
+      cheat_log("app %s suspended", g_title_id);
       // check xml database
       GamePatchInfo GameInfo{};
       GameInfo.image_pid = app_pid;
       GameInfo.image_base = text_base;
       GameInfo.image_size = text_size;
-      strcpy(GameInfo.titleID, app_id);
+      strcpy(GameInfo.titleID, g_title_id);
       strcpy(GameInfo.titleVersion, app_ver);
-      strcpy(GameInfo.ImageSelf, process_name_c_str);
+      strcpy(GameInfo.ImageSelf, proc_name);
       GameInfo.app_mode = PS5_APP;
       Xml_ParseGamePatch(&GameInfo);
       ResumeApp(app_pid);
-      cheat_log("app %s resumed", app_id);
+      cheat_log("app %s resumed", g_title_id);
       int32_t fliprate_game_found = false;
-      if (Xml_parseTitleID_FliprateList(app_id)) {
+      if (Xml_parseTitleID_FliprateList(g_title_id)) {
         printf_notification("Title ID found in universal fliprate list:\n%s",
-                            app_id);
-        cheat_log("Flipped %s", app_id);
+                            g_title_id);
+        cheat_log("Flipped %s", g_title_id);
         ResumeApp(app_pid);
         patch_SetFlipRate(*executable, app_pid);
         fliprate_game_found = true;
