@@ -5,8 +5,6 @@
 #include "game_patch_memory.hpp"
 #include "game_patch_xml.hpp"
 #include "notify.hpp"
-#include "dbg/dbg.hpp"
-
 void cheat_log(const char* fmt, ...);
 // Include the `game_patch_fliprate_list.xml` as a symbol
 __asm__(
@@ -789,7 +787,7 @@ g_module_base = info->image_base;
     cheat_log("g_module_base vaddr 0x%p, size: 0x%lx", g_module_base, g_module_size);
     
     // Allocate buffer for chunks (with overlap space)
-    uint64_t chunk_buffer = (uint64_t)malloc(CHUNK_SIZE + PATTERN_OVERLAP);
+    char *chunk_buffer = (char *)malloc(CHUNK_SIZE + PATTERN_OVERLAP);
     cheat_log("chunk_buffer: 0x%p", chunk_buffer);
     if (!chunk_buffer) {
         cheat_log("chunk_buffer is nullptr");
@@ -842,7 +840,7 @@ g_module_base = info->image_base;
         
         // Scan for main pattern if not found yet
         if (!found_main_pattern && gameAddr) {
-            void* local_match = PatternScan(chunk_buffer, total_read_size, gameAddr);
+            void* local_match = PatternScan((uint64_t)chunk_buffer, total_read_size, gameAddr);
             if (local_match) {
                 // Calculate real address: base + chunk_offset + local_offset - overlap
                 addr_real = (uint64_t)g_module_base + 
@@ -855,7 +853,7 @@ g_module_base = info->image_base;
         
         // Scan for jump pattern if not found yet
         if (!found_jump_pattern && gameJumpTarget) {
-            void* local_match = PatternScan(chunk_buffer, total_read_size, gameJumpTarget);
+            void* local_match = PatternScan((uint64_t)chunk_buffer, total_read_size, gameJumpTarget);
             if (local_match) {
                 // Calculate real address: base + chunk_offset + local_offset - overlap
                 jump_addr = (uint64_t)g_module_base + 
@@ -876,7 +874,7 @@ g_module_base = info->image_base;
     }
     
     // Clean up
-    free(chunk_buffer);
+    free((void*)chunk_buffer);
     
     // Check results
     if (!found_main_pattern || !addr_real) {
