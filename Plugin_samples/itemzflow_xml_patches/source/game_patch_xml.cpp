@@ -5,6 +5,8 @@
 #include "game_patch_memory.hpp"
 #include "game_patch_xml.hpp"
 #include "notify.hpp"
+#include "dbg/dbg.hpp"
+
 void cheat_log(const char* fmt, ...);
 // Include the `game_patch_fliprate_list.xml` as a symbol
 __asm__(
@@ -787,7 +789,7 @@ g_module_base = info->image_base;
     cheat_log("g_module_base vaddr 0x%p, size: 0x%lx", g_module_base, g_module_size);
     
     // Allocate buffer for chunks (with overlap space)
-    char *chunk_buffer = (char *)malloc(CHUNK_SIZE + PATTERN_OVERLAP);
+    uint64_t chunk_buffer = (uint64_t)malloc(CHUNK_SIZE + PATTERN_OVERLAP);
     cheat_log("chunk_buffer: 0x%p", chunk_buffer);
     if (!chunk_buffer) {
         cheat_log("chunk_buffer is nullptr");
