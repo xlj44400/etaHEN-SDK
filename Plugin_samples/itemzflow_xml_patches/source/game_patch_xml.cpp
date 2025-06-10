@@ -781,6 +781,7 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 					if (use_mask)
 					{
 
+						sleep(6);
 						module_info_t* mod = get_module_info(info->image_pid, info->ImageSelf);
 						if(!mod){
                                                     cheat_log("unable to get module info");
