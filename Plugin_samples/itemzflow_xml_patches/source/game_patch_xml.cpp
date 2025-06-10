@@ -784,7 +784,7 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 						sleep(12);
 						module_info_t* mod = get_module_info(info->image_pid, info->ImageSelf);
 						if(!mod){
-                                                    notify("unable to get module info");
+                                                    printf_notification("unable to get module info");
 						    return 1;
 						}
 						g_module_base = mod->sections[0].vaddr;
