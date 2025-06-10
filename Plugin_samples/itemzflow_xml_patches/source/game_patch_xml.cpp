@@ -805,7 +805,8 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 							jump_size = strtoul(gameJumpSize, NULL, 10);
 							cheat_log("Target: 0x%lx jump size %u\n", jump_addr, jump_size);
 						}
-						gameOffset = GetXMLAttr(Line_node, "Address");
+						gameOffset = GetXMLAttr(Line_node, "Offset");
+						cheat_log("gameAddr %s", gameAddr);
 						addr_real = (uint64_t)PatternScan(g_module_base, g_module_size, gameAddr);
 						if (!addr_real)
 						{
