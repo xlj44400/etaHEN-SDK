@@ -5,6 +5,7 @@
 #include "game_patch_memory.hpp"
 #include "game_patch_xml.hpp"
 #include "notify.hpp"
+#include "dbg/dbg.hpp"
 void cheat_log(const char* fmt, ...);
 // Include the `game_patch_fliprate_list.xml` as a symbol
 __asm__(
