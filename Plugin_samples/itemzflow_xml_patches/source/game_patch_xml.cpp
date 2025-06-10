@@ -646,7 +646,8 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 	}
 	}
 }
-
+#define CHUNK_SIZE (16 * 1024 * 1024)
+#define PATTERN_OVERLAP 1024  // Max expected pattern size
 int Xml_ParseGamePatch(GamePatchInfo* info)
 {
 	uint32_t patch_lines = 0;
@@ -780,39 +781,115 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 					}
 					if (use_mask)
 					{
-
-#if 0
-						module_info_t* mod = get_module_info(info->image_pid, info->ImageSelf);
-						if(!mod){
-                                                    printf_notification("unable to get module info");
-						    return 1;
-						}
-#endif
-						g_module_base = info->image_base;
-						g_module_size = info->image_size;
-#if 0
-						free(mod);
-#endif
-						cheat_log("g_module_base vaddr 0x%p", g_module_base);
-						uint64_t jump_addr = 0;
-						uint32_t jump_size = 0;
-						const char* gameOffset = nullptr;
-						if (startsWith(gameType, "mask_jump32"))
-						{
-							const char* gameJumpTarget = GetXMLAttr(Line_node, "Target");
-							const char* gameJumpSize = GetXMLAttr(Line_node, "Size");
-							jump_addr = addr_real = (uint64_t)PatternScan(g_module_base, g_module_size, gameJumpTarget);
-							jump_size = strtoul(gameJumpSize, NULL, 10);
-							cheat_log("Target: 0x%lx jump size %u\n", jump_addr, jump_size);
-						}
-						gameOffset = GetXMLAttr(Line_node, "Offset");
-						cheat_log("gameAddr %s", gameAddr);
-						addr_real = (uint64_t)PatternScan(g_module_base, g_module_size, gameAddr);
-						if (!addr_real)
-						{
-							cheat_log("Masked Address: %s not found\n", gameAddr);
-							continue;
-						}
+g_module_base = info->image_base;
+    g_module_size = info->image_size;
+    
+    cheat_log("g_module_base vaddr 0x%p, size: 0x%lx", g_module_base, g_module_size);
+    
+    // Allocate buffer for chunks (with overlap space)
+    char *chunk_buffer = (char *)malloc(CHUNK_SIZE + PATTERN_OVERLAP);
+    cheat_log("chunk_buffer: 0x%p", chunk_buffer);
+    if (!chunk_buffer) {
+        cheat_log("chunk_buffer is nullptr");
+        return false;
+    }
+    
+    uint64_t jump_addr = 0;
+    uint32_t jump_size = 0;
+    const char* gameOffset = nullptr;
+    const char* gameJumpTarget = nullptr;
+    const char* gameJumpSize = nullptr;
+    
+    // Get pattern strings
+    if (startsWith(gameType, "mask_jump32")) {
+        gameJumpTarget = GetXMLAttr(Line_node, "Target");
+        gameJumpSize = GetXMLAttr(Line_node, "Size");
+        jump_size = strtoul(gameJumpSize, NULL, 10);
+    }
+    gameOffset = GetXMLAttr(Line_node, "Offset");
+    cheat_log("gameAddr %s", gameAddr);
+    
+    bool found_main_pattern = false;
+    bool found_jump_pattern = false;
+    uint64_t overlap_size = 0;
+    
+    // Scan through module in chunks
+    for (uint64_t offset = 0; offset < g_module_size && (!found_main_pattern || !found_jump_pattern); 
+         offset += CHUNK_SIZE) {
+        
+        uint64_t current_chunk_size = (offset + CHUNK_SIZE > g_module_size) ? 
+                                      (g_module_size - offset) : CHUNK_SIZE;
+        uint64_t total_read_size = current_chunk_size + overlap_size;
+        
+        // Move overlap data to beginning of buffer
+        if (overlap_size > 0 && offset > 0) {
+            memmove(chunk_buffer, chunk_buffer + CHUNK_SIZE, overlap_size);
+        }
+        
+        // Read new chunk data after the overlap
+        if (dbg::read(info->image_pid, 
+                     (void*)((uint64_t)g_module_base + offset),
+                     chunk_buffer + overlap_size, 
+                     current_chunk_size)) {
+            cheat_log("Failed to read chunk at offset 0x%lx", offset);
+            free(chunk_buffer);
+            return false;
+        }
+        
+        cheat_log("Processing chunk: offset 0x%lx, size 0x%lx", offset, current_chunk_size);
+        
+        // Scan for main pattern if not found yet
+        if (!found_main_pattern && gameAddr) {
+            void* local_match = PatternScan(chunk_buffer, total_read_size, gameAddr);
+            if (local_match) {
+                // Calculate real address: base + chunk_offset + local_offset - overlap
+                addr_real = (uint64_t)g_module_base + 
+                           (offset - overlap_size) + 
+                           ((char*)local_match - chunk_buffer);
+                cheat_log("Main pattern found at remote address: 0x%lx", addr_real);
+                found_main_pattern = true;
+            }
+        }
+        
+        // Scan for jump pattern if not found yet
+        if (!found_jump_pattern && gameJumpTarget) {
+            void* local_match = PatternScan(chunk_buffer, total_read_size, gameJumpTarget);
+            if (local_match) {
+                // Calculate real address: base + chunk_offset + local_offset - overlap
+                jump_addr = (uint64_t)g_module_base + 
+                           (offset - overlap_size) + 
+                           ((char*)local_match - chunk_buffer);
+                cheat_log("Jump pattern found at remote address: 0x%lx", addr_real);
+                found_jump_pattern = true;
+            }
+        }
+        
+        // Setup overlap for next iteration (except on last chunk)
+        if (offset + CHUNK_SIZE < g_module_size) {
+            overlap_size = (current_chunk_size > PATTERN_OVERLAP) ? 
+                          PATTERN_OVERLAP : current_chunk_size;
+        } else {
+            overlap_size = 0;
+        }
+    }
+    
+    // Clean up
+    free(chunk_buffer);
+    
+    // Check results
+    if (!found_main_pattern || !addr_real) {
+        cheat_log("Masked Address: %s not found\n", gameAddr);
+        return 1;
+    }
+    
+    if (gameJumpTarget && (!found_jump_pattern || !jump_addr)) {
+        cheat_log("Jump Target: %s not found\n", gameJumpTarget);
+        return 1;
+    }
+    
+    if (jump_addr) {
+        cheat_log("Target: 0x%lx jump size %u\n", jump_addr, jump_size);
+    }
 						cheat_log("Masked Address: 0x%lx\n", addr_real);
 						cheat_log("Address: %s\n", gameOffset);
 						uint32_t real_offset = 0;
