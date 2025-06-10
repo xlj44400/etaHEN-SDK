@@ -483,7 +483,7 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 			ShowNotifyOnce = true;
 		}
 		cheat_log("patchCall not supported yet");
-		/*
+		
 		u8 call_bytes[5] = { 0 };
 		memcpy(call_bytes, (void*)addr, sizeof(call_bytes));
 		if (call_bytes[0] == 0xe8 || call_bytes[0] == 0xe9)
@@ -503,7 +503,7 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 				free(bytearray);
 			}
 		}
-		*/
+		
 		break;
 	}
 	default:
@@ -652,7 +652,7 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 					}
 					if (use_mask)
 					{
-						/*
+						
 						uint64_t jump_addr = 0;
 						uint32_t jump_size = 0;
 						const char* gameOffset = nullptr;
