@@ -781,14 +781,15 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 					if (use_mask)
 					{
 
-						sleep(12);
+#if 0
 						module_info_t* mod = get_module_info(info->image_pid, info->ImageSelf);
 						if(!mod){
                                                     printf_notification("unable to get module info");
 						    return 1;
 						}
-						g_module_base = mod->sections[0].vaddr;
-						g_module_size = mod->sections[0].size;
+#endif
+						g_module_base = image_base;
+						g_module_size = image_size;
 						free(mod);
 						cheat_log("g_module_base vaddr 0x%p", g_module_base);
 						uint64_t jump_addr = 0;
