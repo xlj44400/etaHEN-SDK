@@ -788,8 +788,8 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 						    return 1;
 						}
 #endif
-						g_module_base = image_base;
-						g_module_size = image_size;
+						g_module_base = info->image_base;
+						g_module_size = info->image_size;
 						free(mod);
 						cheat_log("g_module_base vaddr 0x%p", g_module_base);
 						uint64_t jump_addr = 0;
