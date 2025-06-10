@@ -14,7 +14,7 @@ __asm__(
 	".incbin \"" "data/game_patch_fliprate_list.xml" "\"\n");
 
 extern "C" const char DefaultXml_FliprateList[];
-
+uint32_t  g_module_size = 0;
 extern "C"
 {
 	int32_t sceKernelOpen(const char*, int32_t, int32_t);
@@ -557,14 +557,14 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 			{
 				uintptr_t branched_call = addr + branch_target + sizeof(call_bytes);
 				cheat_log("0x%016lx: 0x%08x -> 0x%016lx\n", addr, branch_target, branched_call);
-				int64_tbytearray_size = 0;
+				int64_t bytearray_size = 0;
 				uint8_t* bytearray = hexstrtochar2(value, &bytearray_size);
 				if (!bytearray)
 				{
 					break;
 				}
 				sceKernelMprotect(branched_call, bytearray_size, 0x07);
-				
+				write_bytes(pid, branched_call, bytearray, bytearray_size);
 				//sys_proc_rw(branched_call, bytearray, bytearray_size);
 				free(bytearray);
 			}
@@ -724,7 +724,9 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
                                                     cheat_log("undable to get module info");
 						    return 1;
 						}
-						g_module_base = mod.sections[0].vaddr;
+						g_module_base = mod->sections[0].vaddr;
+						g_module_size = mod->sections[0].size;
+						free(mod);
 						cheat_log("g_module_base vaddr 0x%p", g_module_base);
 						uint64_t jump_addr = 0;
 						uint32_t jump_size = 0;
