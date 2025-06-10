@@ -32,7 +32,7 @@ extern "C"
 
 
 // valid hex look up table.
-const u8 hex_lut[] = {
+const uint8_t hex_lut[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -56,34 +56,34 @@ const u8 hex_lut[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00};
 
-u8 *hexstrtochar2(const char *hexstr, s64 *size)
+uint8_t *hexstrtochar2(const char *hexstr, int64_t *size)
 {
 
-    u32 str_len = strlen(hexstr);
-    s64 data_len = ((str_len + 1) / 2) * sizeof(u8);
-    *size = (str_len) * sizeof(u8);
+    uint32_t str_len = strlen(hexstr);
+    int64_t data_len = ((str_len + 1) / 2) * sizeof(uint8_t);
+    *size = (str_len) * sizeof(uint8_t);
     if (!*size)
     {
         return nullptr;
     }
-    u8 *data = (u8 *)malloc(*size);
+    uint8_t *data = (uint8_t *)malloc(*size);
     if (!data)
     {
         return nullptr;
     }
-    u32 j = 0; // hexstr position
-    u32 i = 0; // data position
+    uint32_t j = 0; // hexstr position
+    uint32_t i = 0; // data position
 
     if (str_len % 2 == 1)
     {
-        data[i] = (u8)(hex_lut[0] << 4) | hex_lut[(u8)hexstr[j]];
+        data[i] = (uint8_t)(hex_lut[0] << 4) | hex_lut[(uint8_t)hexstr[j]];
         j = ++i;
     }
 
     for (; j < str_len; j += 2, i++)
     {
-        data[i] = (u8)(hex_lut[(u8)hexstr[j]] << 4) |
-                  hex_lut[(u8)hexstr[j + 1]];
+        data[i] = (uint8_t)(hex_lut[(uint8_t)hexstr[j]] << 4) |
+                  hex_lut[(uint8_t)hexstr[j + 1]];
     }
 
     *size = data_len;
@@ -493,8 +493,8 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 		write_bytes(pid, addr, &real_value, sizeof(real_value));
 		break;
 	}
-	case djb2_hash("bytes64"):
-	case djb2_hash("mask_bytes64"):
+	case djb2_hash("byteint64_t"):
+	case djb2_hash("mask_byteint64_t"):
 	{
 		int64_t real_value = 0;
 		if (hex_prefix(value))
