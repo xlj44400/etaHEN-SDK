@@ -790,7 +790,9 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 #endif
 						g_module_base = info->image_base;
 						g_module_size = info->image_size;
+#if 0
 						free(mod);
+#endif
 						cheat_log("g_module_base vaddr 0x%p", g_module_base);
 						uint64_t jump_addr = 0;
 						uint32_t jump_size = 0;
