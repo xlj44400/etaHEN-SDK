@@ -351,7 +351,7 @@ module_info_t* get_module_info(pid_t pid, const char* module_name)
 {
     size_t num_handles = 0;
     syscall(SYS_dl_get_list, pid, NULL, 0, &num_handles);
-    
+    cheat_logs("numb of handles %d", num_handles);
     if (num_handles)
     {
         uintptr_t* handles = (uintptr_t*) calloc(num_handles, sizeof(uintptr_t));
@@ -361,6 +361,7 @@ module_info_t* get_module_info(pid_t pid, const char* module_name)
         
         for (int i = 0; i < num_handles; ++i)
         {
+	    cheat_logs("I handles %i handles %p, fname%s", i, handles[i], mod_info->filename);
             bzero(mod_info, sizeof(module_info_t));
             syscall(SYS_dl_get_info_2, pid, 1, handles[i], mod_info);
             if (!strcmp(mod_info->filename, module_name))
@@ -782,7 +783,7 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 
 						module_info_t* mod = get_module_info(info->image_pid, info->ImageSelf);
 						if(!mod){
-                                                    cheat_log("undable to get module info");
+                                                    cheat_log("unable to get module info");
 						    return 1;
 						}
 						g_module_base = mod->sections[0].vaddr;
