@@ -624,7 +624,7 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 				{
 					break;
 				}
-				sceKernelMprotect(branched_call, bytearray_size, 0x07);
+				sceKernelMprotect((void*)branched_call, bytearray_size, 0x07);
 				write_bytes(pid, branched_call, bytearray, bytearray_size);
 				//sys_proc_rw(branched_call, bytearray, bytearray_size);
 				free(bytearray);
