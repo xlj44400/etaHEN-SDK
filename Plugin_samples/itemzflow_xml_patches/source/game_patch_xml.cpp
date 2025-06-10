@@ -829,7 +829,7 @@ g_module_base = info->image_base;
         
         // Read new chunk data after the overlap
         if (dbg::read(info->image_pid, 
-                     (void*)((uint64_t)g_module_base + offset),
+                     (uint64_t)(g_module_base + offset),
                      chunk_buffer + overlap_size, 
                      current_chunk_size)) {
             cheat_log("Failed to read chunk at offset 0x%lx", offset);
