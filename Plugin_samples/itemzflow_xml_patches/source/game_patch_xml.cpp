@@ -249,8 +249,72 @@ uint64_t patch_hash_calc(const char* title, const char* name, const char* app_ve
 
 //char g_game_elf[] = "eboot.bin";
 //char g_game_ver[] = "01.00";
-//uint64_t g_module_base = 0;
+uint64_t g_module_base = 0;
 #define NO_ASLR_ADDR_PS4 0x00400000
+
+#define SYS_dynlib_get_info_ex 608
+#define SYS_dl_get_list 0x217
+#define SYS_dl_get_info_2 0x2cd
+#define MODULE_INFO_NAME_LENGTH 128
+#define MODULE_INFO_SANDBOXED_PATH_LENGTH 1024
+#define MODULE_INFO_MAX_SECTIONS 4
+#define FINGERPRINT_LENGTH 20
+
+typedef struct {
+	uint64_t vaddr;
+	uint64_t size;
+    uint32_t prot;
+} module_section_t;
+
+typedef struct {
+	char filename[MODULE_INFO_NAME_LENGTH];
+	uint64_t handle;
+	uint8_t unknown0[32]; // NOLINT(readability-magic-numbers)
+	uint64_t init; // init
+	uint64_t fini; // fini
+	uint64_t eh_frame_hdr; // eh_frame_hdr
+	uint64_t eh_frame_hdr_sz; // eh_frame_hdr_sz
+	uint64_t eh_frame; // eh_frame
+	uint64_t eh_frame_sz; // eh_frame_sz
+	module_section_t sections[MODULE_INFO_MAX_SECTIONS];
+	uint8_t unknown7[1176]; // NOLINT(readability-magic-numbers)
+	uint8_t fingerprint[FINGERPRINT_LENGTH];
+	uint32_t unknown8;
+	char libname[MODULE_INFO_NAME_LENGTH];
+	uint32_t unknown9;
+	char sandboxed_path[MODULE_INFO_SANDBOXED_PATH_LENGTH];
+	uint64_t sdk_version;
+} module_info_t;
+
+module_info_t* get_module_info(pid_t pid, const char* module_name)
+{
+    size_t num_handles = 0;
+    syscall(SYS_dl_get_list, pid, NULL, 0, &num_handles);
+    
+    if (num_handles)
+    {
+        uintptr_t* handles = (uintptr_t*) calloc(num_handles, sizeof(uintptr_t));
+        syscall(SYS_dl_get_list, pid, handles, num_handles, &num_handles);
+
+        module_info_t* mod_info = (module_info_t*) malloc(sizeof(module_info_t));
+        
+        for (int i = 0; i < num_handles; ++i)
+        {
+            bzero(mod_info, sizeof(module_info_t));
+            syscall(SYS_dl_get_info_2, pid, 1, handles[i], mod_info);
+            if (!strcmp(mod_info->filename, module_name))
+            {
+                return mod_info;
+            }
+        }
+        
+        free(handles);
+        free(mod_info);
+    }
+
+    return NULL;
+}
+
 
 char* unescape(const char* s)
 {
@@ -484,7 +548,7 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 		}
 		cheat_log("patchCall not supported yet");
 		
-		u8 call_bytes[5] = { 0 };
+		uint8_t call_bytes[5] = { 0 };
 		memcpy(call_bytes, (void*)addr, sizeof(call_bytes));
 		if (call_bytes[0] == 0xe8 || call_bytes[0] == 0xe9)
 		{
@@ -493,13 +557,15 @@ void patch_data1(int pid, const char* patch_type_str, uint64_t addr, const char*
 			{
 				uintptr_t branched_call = addr + branch_target + sizeof(call_bytes);
 				cheat_log("0x%016lx: 0x%08x -> 0x%016lx\n", addr, branch_target, branched_call);
-				s64 bytearray_size = 0;
-				u8* bytearray = hexstrtochar2(value, &bytearray_size);
+				int64_tbytearray_size = 0;
+				uint8_t* bytearray = hexstrtochar2(value, &bytearray_size);
 				if (!bytearray)
 				{
 					break;
 				}
-				sys_proc_rw(branched_call, bytearray, bytearray_size);
+				sceKernelMprotect(branched_call, bytearray_size, 0x07);
+				
+				//sys_proc_rw(branched_call, bytearray, bytearray_size);
 				free(bytearray);
 			}
 		}
@@ -652,7 +718,14 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 					}
 					if (use_mask)
 					{
-						
+
+						module_info_t* mod = get_module_info(info->pid, info->ImageSelf);
+						if(!mod){
+                                                    cheat_log("undable to get module info");
+						    return 1;
+						}
+						g_module_base = mod.sections[0].vaddr;
+						cheat_log("g_module_base vaddr 0x%p", g_module_base);
 						uint64_t jump_addr = 0;
 						uint32_t jump_size = 0;
 						const char* gameOffset = nullptr;
@@ -697,7 +770,6 @@ int Xml_ParseGamePatch(GamePatchInfo* info)
 						{
 							cheat_log("Mask does not reqiure offsetting.\n");
 						}
-						*/
 					}
 					cheat_log("Type: \"%s\"\n", gameType);
 					if (gameAddr && !use_mask)
