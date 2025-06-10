@@ -431,7 +431,7 @@ for (auto p: dbg::getProcesses()) {
         g_foundApp = true;
       }
       cheat_log("suspending app %s", g_title_id);
-      SuspendApp(app_pid);
+    //  SuspendApp(app_pid);
       cheat_log("app %s suspended", g_title_id);
       // check xml database
       GamePatchInfo GameInfo{};
