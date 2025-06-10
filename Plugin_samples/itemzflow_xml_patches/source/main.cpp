@@ -49,8 +49,19 @@ extern "C" int sceSystemServiceLoadExec(const char *path, void* args);
 void sig_handler(int signo)
 {
 	printf_notification("Cheats plugin has crashed with signal %d", signo);
+        unlink("/system_tmp/patch_plugin");
 	printBacktraceForCrash();
-    exit(-1);
+        exit(-1);
+}
+
+bool touch_file(const char *destfile) {
+    static constexpr int FLAGS = 0777;
+    int fd = open(destfile, O_WRONLY | O_CREAT | O_TRUNC, FLAGS);
+    if (fd > 0) {
+        close(fd);
+        return true;
+    }
+    return false;
 }
 
 #include "game_patch_xml_cfg.hpp"
@@ -80,6 +91,7 @@ int main()
 	kernel_base = args->kdata_base_addr;
 
 	unlink("/data/etaHEN/cheat_plugin.log");
+	touch_file("/system_tmp/patch_plugin");
 
 	printf_notification("The Itemzflow XML Cheats plugin has started\n%s\nSpecial Thanks to illusion", BUILD_MSG);
 	// remove this when it's possible to load elf into games at boot
