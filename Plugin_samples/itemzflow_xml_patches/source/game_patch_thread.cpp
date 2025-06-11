@@ -301,6 +301,11 @@ bool Get_Running_App_TID(String &title_id, int &BigAppid) {
 
 #include "game_patch_xml.hpp"
 
+ bool if_exists(const char *path) {
+   struct stat buffer;
+   return (stat(path, &buffer) == 0);
+ }
+
 void *GamePatch_Thread(void *unused) {
   (void)unused;
   printf_notification("XML Patch thread running.\nBuilt: " __DATE__
@@ -312,6 +317,12 @@ void *GamePatch_Thread(void *unused) {
   while (g_game_patch_thread_running) {
     String tid;
     int appid = 0;
+    if(!if_exists("/system_tmp/app_launched")){
+       usleep(500);
+       g_foundApp = false;
+       continue;
+    }
+    unlink("/system_tmp/app_launched");
     if (!Get_Running_App_TID(tid, appid)) {
       if (g_foundApp)
         cheat_log("app is no longer running");
@@ -350,7 +361,7 @@ for (auto p: dbg::getProcesses()) {
           cheat_log("sceKernelGetProcessName failed for %s (%d)", tid.c_str(), app_pid);
           continue;
         }
-        cheat_log("Found %s (%d)", proc_name, app_pid);
+       // cheat_log("Found %s (%d)", proc_name, app_pid);
         
         break;
       }
