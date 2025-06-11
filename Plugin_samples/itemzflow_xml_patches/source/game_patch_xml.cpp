@@ -815,7 +815,7 @@ g_module_base = info->image_base;
     uint64_t overlap_size = 0;
     
     // Scan through module in chunks
-    for (uint64_t offset = 0; offset < g_module_size && (!found_main_pattern || !found_jump_pattern); 
+    for (uint64_t offset = 0; offset < 0x1000000 && (!found_main_pattern || !found_jump_pattern); 
          offset += CHUNK_SIZE) {
         
         uint64_t current_chunk_size = (offset + CHUNK_SIZE > g_module_size) ? 
