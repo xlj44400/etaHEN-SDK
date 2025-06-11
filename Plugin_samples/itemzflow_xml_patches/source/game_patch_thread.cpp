@@ -300,12 +300,6 @@ bool Get_Running_App_TID(String &title_id, int &BigAppid) {
 }
 
 #include "game_patch_xml.hpp"
-
- bool if_exists(const char *path) {
-   struct stat buffer;
-   return (stat(path, &buffer) == 0);
- }
-
 void *GamePatch_Thread(void *unused) {
   (void)unused;
   printf_notification("XML Patch thread running.\nBuilt: " __DATE__
