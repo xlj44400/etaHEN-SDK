@@ -20,7 +20,7 @@
 #include "util.hpp"
 #include "notify.hpp"
 #define STANDALONE 1 // sendable using nc (no host features, scripts will not work in this mode)
-#define RESTMODE 1	 // able to enter sleep mode (no host features, scripts will not work in this mode)
+#define RESTMODE 1	 // able to enter sleep mode (no host features, scripts will not work in this mode).
 
 #include <pthread.h>
 #include "game_patch_thread.hpp"
