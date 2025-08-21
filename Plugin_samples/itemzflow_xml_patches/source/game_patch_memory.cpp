@@ -299,21 +299,21 @@ static std::vector<int32_t> PatternToByte(const std::string& pattern) {
 uint8_t* PatternScanNew(const char *signature, const uint32_t image_size) {
     // 参数验证
     if (!signature || !signature[0]) {
-        plugin_log("Error: Invalid signature");
+        cheat_log("Error: Invalid signature");
         return nullptr;
     }
     
     if (!g_eboot_address) {
-        plugin_log("Error: Invalid base address");
+        cheat_log("Error: Invalid base address");
         return nullptr;
     }
     
     if (image_size == 0) {
-        plugin_log("Error: Zero image size");
+        cheat_log("Error: Zero image size");
         return nullptr;
     }
 
-    plugin_log("Scanning pattern in module_size: 0x%x", image_size);
+    cheat_log("Scanning pattern in module_size: 0x%x", image_size);
     
     // 转换模式
     std::vector<int32_t> patternBytes = PatternToByte(signature);
@@ -321,12 +321,12 @@ uint8_t* PatternScanNew(const char *signature, const uint32_t image_size) {
     const size_t patternSize = patternBytes.size();
     
     if (patternSize == 0) {
-        plugin_log("Error: Failed to convert pattern");
+        cheat_log("Error: Failed to convert pattern");
         return nullptr;
     }
     
     if (patternSize > image_size) {
-        plugin_log("Error: Pattern too large (pattern: %zu, image: %u)", patternSize, image_size);
+        cheat_log("Error: Pattern too large (pattern: %zu, image: %u)", patternSize, image_size);
         return nullptr;
     }
 
@@ -346,13 +346,13 @@ uint8_t* PatternScanNew(const char *signature, const uint32_t image_size) {
         }
         
         if (match) {
-            plugin_log("Pattern found at offset: 0x%x (address: 0x%p)", 
+            cheat_log("Pattern found at offset: 0x%x (address: 0x%p)", 
                       offset, &scanBytes[offset]);
             return const_cast<uint8_t*>(&scanBytes[offset]);
         }
     }
     
-    plugin_log("Pattern not found");
+    cheat_log("Pattern not found");
     return nullptr;
 }
 
