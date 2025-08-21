@@ -3,6 +3,7 @@
 #include <nid.hpp>
 #include <fcntl.h>
 #include <string>
+#include <vector>
 #include <sys/sysctl.h>
 extern "C"     int sceKernelGetProcessName(int pid, char *out);
 void write_log(const char* text)
