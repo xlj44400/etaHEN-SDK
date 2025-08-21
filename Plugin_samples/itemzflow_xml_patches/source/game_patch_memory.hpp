@@ -29,7 +29,7 @@ void write_float64(pid_t pid, uint64_t addr, const double val);
 void write_string(pid_t pid, uint64_t addr, const char *string);
 void write_wstring(pid_t pid, uint64_t addr, const wchar_t *string);
 uint8_t *PatternScan(const uint64_t module_base, const uint64_t module_size, const char *signature);
-uint8_t* PatternScanNew(const char *signature, const uint32_t g_eboot_image_size);
+uint8_t *PatternScanNew(const char *signature, const uint32_t g_eboot_image_size);
 
 bool patchShellCore(const pid_t app_pid, const uint64_t shellcore_base, const uint64_t shellcore_size);
 bool UnPatchShellCore(const pid_t app_pid);
