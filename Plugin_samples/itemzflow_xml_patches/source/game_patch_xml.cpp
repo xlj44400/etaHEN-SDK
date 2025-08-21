@@ -841,7 +841,7 @@ g_module_base = info->image_base;
         
         // Scan for main pattern if not found yet
         if (!found_main_pattern && gameAddr) {
-            void* local_match = PatternScan((uint64_t)chunk_buffer, total_read_size, gameAddr);
+            void* local_match = PatternScanNew(gameAddr,g_module_size);
             if (local_match) {
                 // Calculate real address: base + chunk_offset + local_offset - overlap
                 addr_real = (uint64_t)g_module_base + 
