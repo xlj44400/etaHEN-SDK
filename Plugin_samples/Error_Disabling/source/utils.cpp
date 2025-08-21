@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 #include <sys/sysctl.h>
+#include <cstdint>
+#include <cstdio>
+uint64_t g_eboot_address = 0;  // 定义或改为extern如果在其他地方定义
 extern "C"     int sceKernelGetProcessName(int pid, char *out);
 void write_log(const char* text)
 {
@@ -187,31 +190,31 @@ static std::vector<int32_t> PatternToByte(const std::string& pattern) {
     return bytes;
 }
 
-uint8_t PatternScanNew(const std::string& signature,const uint64_t g_eboot_image_size) {
-  plugin_log(" module_size: 0x%lx", g_eboot_image_size);
+uint8_t* PatternScanNew(const std::string& signature, const uint64_t g_eboot_image_size) {
+    plugin_log(" module_size: 0x%lx", g_eboot_image_size);
+    
     std::vector<int32_t> patternBytes = PatternToByte(signature);
-    const auto scanBytes = static_cast<uint8_t*>((void*)g_eboot_address);
-
+    const uint8_t* scanBytes = reinterpret_cast<const uint8_t*>(g_eboot_address);
+    
     const int32_t* sigPtr = patternBytes.data();
     const size_t sigSize = patternBytes.size();
 
-    uint32_t foundResults = 0;
-    for (uint32_t i = 0; i < g_eboot_image_size - sigSize; ++i) {
+    for (size_t i = 0; i < g_eboot_image_size - sigSize; ++i) {
         bool found = true;
-        for (uint32_t j = 0; j < sigSize; ++j) {
-            if (scanBytes[i + j] != sigPtr[j] && sigPtr[j] != -1) {
+        
+        for (size_t j = 0; j < sigSize; ++j) {
+            if (sigPtr[j] != -1 && scanBytes[i + j] != static_cast<uint8_t>(sigPtr[j])) {
                 found = false;
                 break;
             }
         }
 
         if (found) {
-            foundResults++;
-            return &scanBytes[i];
+            return const_cast<uint8_t*>(&scanBytes[i]);
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 pid_t g_ShellCorePid = 0;
