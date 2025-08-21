@@ -190,30 +190,63 @@ static std::vector<int32_t> PatternToByte(const std::string& pattern) {
     return bytes;
 }
 
-uint8_t* PatternScanNew(const char *signature, const uint64_t g_eboot_image_size) {
-    plugin_log(" module_size: 0x%lx", g_eboot_image_size);
-    std::string strSignature = signature;
-    std::vector<int32_t> patternBytes = PatternToByte(strSignature);
-    const uint8_t* scanBytes = reinterpret_cast<const uint8_t*>(g_eboot_address);
+uint8_t* PatternScanNew(const char *signature, const uint32_t image_size) {
+    // 参数验证
+    if (!signature || !signature[0]) {
+        plugin_log("Error: Invalid signature");
+        return nullptr;
+    }
     
-    const int32_t* sigPtr = patternBytes.data();
-    const size_t sigSize = patternBytes.size();
+    if (!g_eboot_address) {
+        plugin_log("Error: Invalid base address");
+        return nullptr;
+    }
+    
+    if (image_size == 0) {
+        plugin_log("Error: Zero image size");
+        return nullptr;
+    }
 
-    for (size_t i = 0; i < g_eboot_image_size - sigSize; ++i) {
-        bool found = true;
+    plugin_log("Scanning pattern in module_size: 0x%x", image_size);
+    
+    // 转换模式
+    std::vector<int32_t> patternBytes = PatternToByte(signature);
+    const uint8_t* scanBytes = reinterpret_cast<const uint8_t*>(g_eboot_address);
+    const size_t patternSize = patternBytes.size();
+    
+    if (patternSize == 0) {
+        plugin_log("Error: Failed to convert pattern");
+        return nullptr;
+    }
+    
+    if (patternSize > image_size) {
+        plugin_log("Error: Pattern too large (pattern: %zu, image: %u)", patternSize, image_size);
+        return nullptr;
+    }
+
+    // 安全搜索
+    const uint32_t maxOffset = image_size - static_cast<uint32_t>(patternSize);
+    
+    for (uint32_t offset = 0; offset <= maxOffset; ++offset) {
+        bool match = true;
         
-        for (size_t j = 0; j < sigSize; ++j) {
-            if (sigPtr[j] != -1 && scanBytes[i + j] != static_cast<uint8_t>(sigPtr[j])) {
-                found = false;
+        for (size_t i = 0; i < patternSize; ++i) {
+            // 通配符(-1)匹配任何字节
+            if (patternBytes[i] != -1 && 
+                scanBytes[offset + i] != static_cast<uint8_t>(patternBytes[i])) {
+                match = false;
                 break;
             }
         }
-
-        if (found) {
-            return const_cast<uint8_t*>(&scanBytes[i]);
+        
+        if (match) {
+            plugin_log("Pattern found at offset: 0x%x (address: 0x%p)", 
+                      offset, &scanBytes[offset]);
+            return const_cast<uint8_t*>(&scanBytes[offset]);
         }
     }
-
+    
+    plugin_log("Pattern not found");
     return nullptr;
 }
 
