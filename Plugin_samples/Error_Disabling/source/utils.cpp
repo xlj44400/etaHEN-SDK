@@ -190,10 +190,10 @@ static std::vector<int32_t> PatternToByte(const std::string& pattern) {
     return bytes;
 }
 
-uint8_t* PatternScanNew(const std::string& signature, const uint64_t g_eboot_image_size) {
+uint8_t* PatternScanNew(const char *signature, const uint64_t g_eboot_image_size) {
     plugin_log(" module_size: 0x%lx", g_eboot_image_size);
-    
-    std::vector<int32_t> patternBytes = PatternToByte(signature);
+    std::string strSignature = signature;
+    std::vector<int32_t> patternBytes = PatternToByte(strSignature);
     const uint8_t* scanBytes = reinterpret_cast<const uint8_t*>(g_eboot_address);
     
     const int32_t* sigPtr = patternBytes.data();
