@@ -7,7 +7,7 @@
 #include <sys/sysctl.h>
 #include <cstdint>
 #include <cstdio>
-uint64_t g_eboot_address = 0;  // 定义或改为extern如果在其他地方定义
+
 extern "C"     int sceKernelGetProcessName(int pid, char *out);
 void write_log(const char* text)
 {
