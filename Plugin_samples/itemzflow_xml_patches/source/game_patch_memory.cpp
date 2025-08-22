@@ -6,7 +6,6 @@
 #include <vector>
 #include <cstdint>
 #include <cstdio>
-uint64_t g_eboot_address = 0;  // 定义或改为extern如果在其他地方定义
 
 uint32_t FlipRate_ConfigureOutput_Ptr;
 uint32_t FlipRate_isVideoModeSupported_Ptr;
@@ -296,64 +295,64 @@ static std::vector<int32_t> PatternToByte(const std::string& pattern) {
     return bytes;
 }
 
-uint8_t* PatternScanNew(const char *signature, const uint32_t image_size) {
-    // 参数验证
-    if (!signature || !signature[0]) {
-        cheat_log("Error: Invalid signature");
-        return nullptr;
-    }
-    
-    if (!g_eboot_address) {
-        cheat_log("Error: Invalid base address");
-        return nullptr;
-    }
-    
-    if (image_size == 0) {
-        cheat_log("Error: Zero image size");
-        return nullptr;
-    }
+uint8_t* PatternScanNew(const char *signature,const uintptr_t g_eboot_address, const uint32_t image_size) {
+	// 参数验证
+	if (!signature || !signature[0]) {
+		cheat_log("Error: Invalid signature");
+		return nullptr;
+	}
 
-    cheat_log("Scanning pattern in module_size: 0x%x", image_size);
-    
-    // 转换模式
-    std::vector<int32_t> patternBytes = PatternToByte(signature);
-    const uint8_t* scanBytes = reinterpret_cast<const uint8_t*>(g_eboot_address);
-    const size_t patternSize = patternBytes.size();
-    
-    if (patternSize == 0) {
-        cheat_log("Error: Failed to convert pattern");
-        return nullptr;
-    }
-    
-    if (patternSize > image_size) {
-        cheat_log("Error: Pattern too large (pattern: %zu, image: %u)", patternSize, image_size);
-        return nullptr;
-    }
+	if (!g_eboot_address) {
+		cheat_log("Error: Invalid base address");
+		return nullptr;
+	}
 
-    // 安全搜索
-    const uint32_t maxOffset = image_size - static_cast<uint32_t>(patternSize);
-    
-    for (uint32_t offset = 0; offset <= maxOffset; ++offset) {
-        bool match = true;
-        
-        for (size_t i = 0; i < patternSize; ++i) {
-            // 通配符(-1)匹配任何字节
-            if (patternBytes[i] != -1 && 
-                scanBytes[offset + i] != static_cast<uint8_t>(patternBytes[i])) {
-                match = false;
-                break;
-            }
-        }
-        
-        if (match) {
-            cheat_log("Pattern found at offset: 0x%x (address: 0x%p)", 
-                      offset, &scanBytes[offset]);
-            return const_cast<uint8_t*>(&scanBytes[offset]);
-        }
-    }
-    
-    cheat_log("Pattern not found");
-    return nullptr;
+	if (image_size == 0) {
+		cheat_log("Error: Zero image size");
+		return nullptr;
+	}
+
+	cheat_log("Scanning pattern in module_size: 0x%x g_eboot_address:%s", image_size,g_eboot_address);
+
+	// 转换模式
+	std::vector<int32_t> patternBytes = PatternToByte(signature);
+	const auto scanBytes = static_cast<uint8_t*>((void*)g_eboot_address);
+	const size_t patternSize = patternBytes.size();
+
+	if (patternSize == 0) {
+		cheat_log("Error: Failed to convert pattern");
+		return nullptr;
+	}
+
+	if (patternSize > image_size) {
+		cheat_log("Error: Pattern too large (pattern: %zu, image: %u)", patternSize, image_size);
+		return nullptr;
+	}
+
+	// 安全搜索
+	const uint32_t maxOffset = image_size - static_cast<uint32_t>(patternSize);
+
+	for (uint32_t offset = 0; offset <= maxOffset; ++offset) {
+		bool match = true;
+
+		for (size_t i = 0; i < patternSize; ++i) {
+			// 通配符(-1)匹配任何字节
+			if (patternBytes[i] != -1 &&
+				scanBytes[offset + i] != static_cast<uint8_t>(patternBytes[i])) {
+				match = false;
+				break;
+				}
+		}
+
+		if (match) {
+			cheat_log("Pattern found at offset: 0x%x (address: 0x%p)",
+					  offset, &scanBytes[offset]);
+			return &scanBytes[offset];
+		}
+	}
+
+	cheat_log("Pattern not found");
+	return nullptr;
 }
 
 char backupShellCoreBytes[5] = {0};
