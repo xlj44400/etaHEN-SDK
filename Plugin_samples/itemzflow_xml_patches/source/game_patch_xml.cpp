@@ -841,7 +841,9 @@ g_module_base = info->image_base;
         
         // Scan for main pattern if not found yet
         if (!found_main_pattern && gameAddr) {
+        	cheat_log("Main pattern found 11");
         	void* local_match = PatternScanNew(gameAddr,g_module_base,g_module_size);
+        	cheat_log("Main pattern found 22");
             if (local_match) {
                 // Calculate real address: base + chunk_offset + local_offset - overlap
                 addr_real = (uint64_t)g_module_base + 
@@ -851,9 +853,10 @@ g_module_base = info->image_base;
                 found_main_pattern = true;
             }
         }
-        
+    	cheat_log("Main pattern found 33");
         // Scan for jump pattern if not found yet
         if (!found_jump_pattern && gameJumpTarget) {
+        	cheat_log("Main pattern found 44");
             void* local_match = PatternScan((uint64_t)chunk_buffer, total_read_size, gameJumpTarget);
             if (local_match) {
                 // Calculate real address: base + chunk_offset + local_offset - overlap
@@ -864,7 +867,7 @@ g_module_base = info->image_base;
                 found_jump_pattern = true;
             }
         }
-        
+    	cheat_log("Main pattern found 55");
         // Setup overlap for next iteration (except on last chunk)
         if (offset + CHUNK_SIZE < g_module_size) {
             overlap_size = (current_chunk_size > PATTERN_OVERLAP) ? 
@@ -887,7 +890,7 @@ g_module_base = info->image_base;
         cheat_log("Jump Target: %s not found\n", gameJumpTarget);
         return 1;
     }
-    
+						cheat_log("Main pattern found 66");
     if (jump_addr) {
         cheat_log("Target: 0x%lx jump size %u\n", jump_addr, jump_size);
     }
